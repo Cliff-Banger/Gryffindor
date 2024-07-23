@@ -1,0 +1,143 @@
+﻿@model Gryffindor.Web.Models.OrganisationViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="divHeading">Edit Organisation</div>
+<hr>
+
+<div class="message">@ViewBag.Message</div>
+
+@using (Html.BeginForm("Edit", "Organisation", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken();
+    <div class="editProfileContainer">
+        <img id="postedLogoPicture" src="@Model.Organisation.LogoPath" style="width:60px;display:inline-block" />
+        <div style="text-align:left;padding:8px 12px;display:none" class="blueBackground" id="postedLogoPictureContainer">x</div>
+        <div class="divUpload defaultBackground">
+            <a href="#">
+                <img src="~/Content/Images/Icons/camera-white.png" alt="Attach" /><span style="color:#fff">Change</span>
+                @Html.TextBoxFor(m => m.LogoFile, new { @id = "imgUploadLogo", @type = "file", @class = "upload", @accept = "image/*" })
+            </a>
+        </div>
+        @Html.ValidationMessageFor(m => m.LogoFile)
+    </div>
+    <div class="editProfileContainer">
+        <img id="postedMainPicture" src="@Model.Organisation.LogoPath" style="width:60px;display:inline-block" />
+        <div style="text-align:left;padding:8px 12px;display:none" class="blueBackground" id="postedMainPictureContainer">x</div>
+        <div class="divUpload defaultBackground">
+            <a href="#">
+                <img src="~/Content/Images/Icons/camera-white.png" alt="Attach" /><span style="color:#fff">Change</span>
+                @Html.TextBoxFor(m => m.MainImageFile, new { @id = "imgUploadMain", @type = "file", @class = "upload", @accept = "image/*" })
+            </a>
+        </div>
+        @Html.ValidationMessageFor(m => m.MainImageFile)
+    </div>
+    <div class="divSubHeading">Details</div>
+    <hr>
+    <div class="editProfileContainer">
+        <ol>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Organisation.Name)</p>
+                @Html.TextBoxFor(m => m.Organisation.Name)
+                <br>@Html.ValidationMessageFor(m => m.Organisation.Name)
+            </li>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Organisation.Description)</p>
+                @Html.TextBoxFor(m => m.Organisation.Description)
+                <br>@Html.ValidationMessageFor(m => m.Organisation.Description)
+            </li>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.OrganisationType)</p>
+                @Html.EnumDropDownListFor(m => m.OrganisationType)
+                <br>@Html.ValidationMessageFor(m => m.OrganisationType)
+            </li>
+        </ol>
+    </div>
+    <div class="divSubHeading">Address</div>
+    <hr>
+    <div class="editProfileContainer">
+        <ol>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Organisation.Address)</p>
+                @Html.TextBoxFor(m => m.Organisation.Address)
+                <br>@Html.ValidationMessageFor(m => m.Organisation.Address)
+            </li>
+        </ol>
+    </div>
+    <div class="divSubHeading">Contact details</div>
+    <hr>
+    <div class="editProfileContainer">
+        <ol>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Organisation.Email)</p>
+                @Html.TextBoxFor(m => m.Organisation.Email, new { @placeholder = "Email" })
+                <br>@Html.ValidationMessageFor(m => m.Organisation.Email)
+            </li>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Organisation.Telephone)</p>
+                @Html.TextBoxFor(m => m.Organisation.Telephone, new { @placeholder = "Phone number" })
+                <br>@Html.ValidationMessageFor(m => m.Organisation.Telephone)
+            </li>
+        </ol>
+        <ol>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Organisation.Website)</p>
+                @Html.TextBoxFor(m => m.Organisation.Website, new { @placeholder = "Website" })
+                <br>@Html.ValidationMessageFor(m => m.Organisation.Website)
+            </li>
+        </ol>
+        <ol>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Organisation.ApplicaitonUrl)</p>
+                @Html.TextAreaFor(m => m.Organisation.ApplicaitonUrl, new { @placeholder = "Application Url" })
+                <br>@Html.ValidationMessageFor(m => m.Organisation.ApplicaitonUrl)
+            </li>
+        </ol>
+    </div>
+    <div class="divSubHeading">Courses / Subjects / Professions</div>
+    <hr>
+    <div class="editProfileContainer">
+        <li>
+            <p class="label">@Html.LabelFor(m => m.Organisation.Tags)</p>
+            @Html.TextAreaFor(m => m.Organisation.Tags, new { @placeholder = "Tags" })
+            <br>@Html.ValidationMessageFor(m => m.Organisation.Tags)
+        </li>
+    </div>
+    <hr />
+    <div class="editProfileContainer">
+        <button type="submit" class="greenBackground btn">
+            Save changes
+        </button>
+    </div>
+}
+<script>
+        $(window).ready(function () {
+            $("#imgUpload").change(function () {
+                readURL(this);
+            });
+            $("#postedPictureContainer").click(function () {
+                var input = $("#imgUpload");
+                input.replaceWith(input.val('').clone(true));
+            });
+        });
+
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $("#postedPicture").attr("src", e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                //$("#postedPictureContainer").css({"display":"inline-block"});
+            }
+            else {
+                $("#postedPictureContainer").hide();
+            }
+        }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,55 @@
+﻿@model Gryffindor.Web.Models.InterestsViewModel
+@{
+    ViewBag.Title = "Interests";
+    Layout = Model.HasInterests ? "~/Views/Shared/_Layout.cshtml" : "~/Views/Shared/_LayoutAccount.cshtml";
+}
+<style>
+    
+.content {
+    text-align:center;
+}
+.buttonSection {
+    width:100%;
+    bottom:0;
+    left:0;
+    position:fixed;
+    height:50px;
+}
+ .interests{
+    width:120px;
+    margin: 0 auto;
+    height:40px;
+    max-width:500px;
+    border:1px solid;
+    padding:12px;
+    padding-top: 9px;
+}
+button:hover {
+    opacity:0.8;
+}
+button:active {
+    opacity:0.9;
+}
+</style>
+<div class="divHeading">Choose your interests</div>
+<hr>
+
+<div class="message">@ViewBag.Message</div>
+
+@Html.Partial("~/Views/Profile/_Channels.cshtml", Model.UserChannels)
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input name="channelsToAdd" type="hidden" id="channelsToFollow" value="">
+    <input name="channelsToRemove" type="hidden" id="channelsToUnFollow" value="">
+    <div class="buttonSection">
+    <a href="@Url.Action("Index","Profile")" class="defaultBackground interests">
+        Skip
+    </a>
+    <button class="greenBackground interests">
+        Continue
+    </button>
+    </div>
+}
+

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<string>
+<style>
+    .divCollageItem {
+        display: inline-block;
+        height: 188px;
+        width: 10%;
+        float: right;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        opacity: 0.24;
+        overflow: hidden;
+    }
+</style>
+@foreach(var item in Model)
+{
+    <div class="divCollageItem" style="background-image:url(@item)">
+    </div>
+}

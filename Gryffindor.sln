@@ -1,0 +1,95 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gryffindor.Contract", "Gryffindor.Contract\Gryffindor.Contract.csproj", "{A16A6A14-7286-4B6B-A393-254D7CF23AB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gryffindor.Service", "Gryffindor.Service\Gryffindor.Service.csproj", "{D585BCBB-239B-42A4-9EA6-C7C63A832E22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gryffindor.WAS", "Gryffindor.WAS\Gryffindor.WAS.csproj", "{830C9ACE-15AF-452E-842E-791611BA5075}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{05D9A11E-0D70-4FFA-B76D-C9A48F23E9B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configs", "Configs", "{0756F2CD-47C2-4B7A-BEFB-C8E43A9E8941}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{F7B4144A-2BB9-413F-BF52-5BCEDF72788E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dev", "Dev", "{192B8AD7-348D-420E-83F6-839829BBD33D}"
+	ProjectSection(SolutionItems) = preProject
+		Configs\Dev\Gryffindor.WAS.config = Configs\Dev\Gryffindor.WAS.config
+		Configs\Dev\Gryffindor.Web.config = Configs\Dev\Gryffindor.Web.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Live", "Live", "{E46EAF80-7D58-4540-8181-5F3FC0753CD4}"
+	ProjectSection(SolutionItems) = preProject
+		Configs\Live\Gryffindor.WAS.config = Configs\Live\Gryffindor.WAS.config
+		Configs\Live\Gryffindor.Web.config = Configs\Live\Gryffindor.Web.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CareerJet", "CareerJet", "{32252A54-A359-4F0F-9370-31F6532F3119}"
+	ProjectSection(SolutionItems) = preProject
+		SolutionItems\WebServiceCareerjet\Newtonsoft.Json.Net20.dll = SolutionItems\WebServiceCareerjet\Newtonsoft.Json.Net20.dll
+		SolutionItems\WebServiceCareerjet\WebService.Careerjet.Client.dll = SolutionItems\WebServiceCareerjet\WebService.Careerjet.Client.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gryffindor.Web", "Gryffindor.Web\Gryffindor.Web.csproj", "{92CC8267-16FB-4E01-BB80-AE8B5D9426CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A16A6A14-7286-4B6B-A393-254D7CF23AB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A16A6A14-7286-4B6B-A393-254D7CF23AB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A16A6A14-7286-4B6B-A393-254D7CF23AB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A16A6A14-7286-4B6B-A393-254D7CF23AB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D585BCBB-239B-42A4-9EA6-C7C63A832E22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D585BCBB-239B-42A4-9EA6-C7C63A832E22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D585BCBB-239B-42A4-9EA6-C7C63A832E22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D585BCBB-239B-42A4-9EA6-C7C63A832E22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{830C9ACE-15AF-452E-842E-791611BA5075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{830C9ACE-15AF-452E-842E-791611BA5075}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{830C9ACE-15AF-452E-842E-791611BA5075}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{830C9ACE-15AF-452E-842E-791611BA5075}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92CC8267-16FB-4E01-BB80-AE8B5D9426CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92CC8267-16FB-4E01-BB80-AE8B5D9426CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92CC8267-16FB-4E01-BB80-AE8B5D9426CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92CC8267-16FB-4E01-BB80-AE8B5D9426CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A16A6A14-7286-4B6B-A393-254D7CF23AB1} = {05D9A11E-0D70-4FFA-B76D-C9A48F23E9B7}
+		{D585BCBB-239B-42A4-9EA6-C7C63A832E22} = {05D9A11E-0D70-4FFA-B76D-C9A48F23E9B7}
+		{830C9ACE-15AF-452E-842E-791611BA5075} = {05D9A11E-0D70-4FFA-B76D-C9A48F23E9B7}
+		{192B8AD7-348D-420E-83F6-839829BBD33D} = {0756F2CD-47C2-4B7A-BEFB-C8E43A9E8941}
+		{E46EAF80-7D58-4540-8181-5F3FC0753CD4} = {0756F2CD-47C2-4B7A-BEFB-C8E43A9E8941}
+		{32252A54-A359-4F0F-9370-31F6532F3119} = {F7B4144A-2BB9-413F-BF52-5BCEDF72788E}
+		{92CC8267-16FB-4E01-BB80-AE8B5D9426CE} = {05D9A11E-0D70-4FFA-B76D-C9A48F23E9B7}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://version4.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Gryffindor.Contract\\Gryffindor.Contract.csproj
+		SccProjectTopLevelParentUniqueName1 = Gryffindor.sln
+		SccProjectName1 = Gryffindor.Contract
+		SccLocalPath1 = Gryffindor.Contract
+		SccProjectUniqueName2 = Gryffindor.Service\\Gryffindor.Service.csproj
+		SccProjectTopLevelParentUniqueName2 = Gryffindor.sln
+		SccProjectName2 = Gryffindor.Service
+		SccLocalPath2 = Gryffindor.Service
+		SccProjectUniqueName3 = Gryffindor.WAS\\Gryffindor.WAS.csproj
+		SccProjectTopLevelParentUniqueName3 = Gryffindor.sln
+		SccProjectName3 = Gryffindor.WAS
+		SccLocalPath3 = Gryffindor.WAS
+		SccProjectUniqueName4 = Gryffindor.Web\\Gryffindor.Web.csproj
+		SccProjectTopLevelParentUniqueName4 = Gryffindor.sln
+		SccProjectName4 = Gryffindor.Web
+		SccLocalPath4 = Gryffindor.Web
+	EndGlobalSection
+EndGlobal

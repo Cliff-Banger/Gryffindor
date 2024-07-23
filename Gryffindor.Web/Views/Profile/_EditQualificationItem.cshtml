@@ -1,0 +1,84 @@
+﻿<div id="editQualificationItemContainer" qualtype="" selectedid="" redirectTo="@Url.Action("Qualifications", "Profile")">
+    <div id="editQualificationItem">
+        <div class="table-cell">
+            <div id="editQualification" class="itemAction edit">
+                Edit
+            </div>
+            <div id="deleteQualification" class="itemAction delete">
+                Delete
+            </div>
+        </div>
+
+        <div class="table-cell" id="closeEditQualificationOption">
+            x
+        </div>
+    </div>
+</div>
+<style>
+    #editQualificationItemContainer {
+        display:none;
+    }
+    #editQualificationItem {
+        display: table;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        min-height: 80px;
+        background-color: #fff;
+    }
+
+    #editQualificationItem > .table-cell {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .itemAction.edit {
+        border-bottom: 1px solid #dcdcdc;
+    }
+    .itemAction {
+        padding: 5px;
+        opacity:1;
+    }
+
+    .itemAction:hover {
+        background-color:#dcdcdc;
+    }
+    .itemAction:active {
+        opacity:0.7;
+    }
+
+    .itemAction:hover {
+        background-color: #f1f1f1;
+    }
+
+    #closeEditQualificationOption {
+        text-align: center;
+        background-color: #dcdcdc;
+        width:50px;
+    }
+</style>
+
+<script>
+    $(window).ready(function () {
+        $("#editQualification").click(function () {
+            var qualType = $("#editQualificationItemContainer").attr("qualtype");
+            var selectedId = $("#editQualificationItemContainer").attr("selectedid");
+            window.location.href = $("#editQualificationItemContainer").attr("redirectTo") + "?option=" + qualType + "&selectedId=" +selectedId;
+        });
+
+        $("#deleteQualification").click(function () {
+            var qualType = $("#editQualificationItemContainer").attr("qualtype");
+            var selectedId = $("#editQualificationItemContainer").attr("selectedid");
+            
+            $.post("/Profile/DeleteQualification", { type: qualType, id: selectedId }, function (result) {
+                if (result.toLowerCase() == "false") {
+                    alert("damn!");
+                } else {
+                    $("#" + selectedId).parent().remove();
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Gryffindor.Contract.Dto.Notification>
+@{ 
+
+}
+
+    @foreach (var item in Model)
+    {
+        var notificationLink = string.IsNullOrEmpty(item.NotificationLink) ? "#" : item.NotificationLink;
+
+        <div class="notificationItem">
+            <a href="@Url.Action("View", "Profile", new { id = item.SenderUsername })">@item.SenderName</a> <a style="font-weight:normal;" href="@notificationLink">@item.Text</a>
+        </div>   
+    }
+    <div class="notificationItem">
+        <a href="@Url.Action("Index", "Notifications")">view more...</a>
+    </div>

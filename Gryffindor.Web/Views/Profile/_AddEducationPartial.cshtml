@@ -1,0 +1,40 @@
+﻿@model Gryffindor.Web.Models.QualificationViewModel
+
+<div class="editProfileContainer">
+    <input type="hidden" value="@Convert.ToInt32(Gryffindor.Contract.Enums.QualificationType.Education)" name="type">
+    @Html.HiddenFor(m => m.UserProfileEducation.UserProfileEducationId)
+    @Html.AntiForgeryToken()
+    <ol>
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileEducation.SchoolName)</p>
+            @Html.TextBoxFor(m => m.UserProfileEducation.SchoolName, new { @placeholder = "School", @required = "required" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileEducation.SchoolName)
+        </li>
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileEducation.StudyFields)</p>
+            @Html.TextBoxFor(m => m.UserProfileEducation.StudyFields, new { @placeholder = "courses / subjects studied...", @required = "required" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileEducation.StudyFields)
+        </li>
+    </ol>
+    <ul class="datePlaceholder">
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileEducation.DateFrom)</p>
+            @Html.TextBoxFor(m => m.UserProfileEducation.DateFrom, new { @placeholder = "Studied from", @class = "datepicker", @readonly = "readonly", @required = "required" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileEducation.DateFrom)
+        </li>
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileEducation.DateTo)</p>
+            @Html.TextBoxFor(m => m.UserProfileEducation.DateTo, new { @placeholder = "Studied until", @class = "datepicker", @readonly = "readonly" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileEducation.DateTo)
+        </li>
+    </ul>
+</div>
+<div class="editProfileContainer">
+    <button type="submit" class="greenBackground btn">
+        Save Education
+    </button>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

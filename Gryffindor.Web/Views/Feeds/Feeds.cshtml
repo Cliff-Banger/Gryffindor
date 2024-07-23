@@ -1,0 +1,9 @@
+﻿@model Gryffindor.Web.Models.BrowseFeedsViewModel
+@{
+    ViewBag.Title = "Feeds";
+}
+
+
+
+@Html.Action("GetFeeds_CareerJet", "Feeds", new { keywords = Model.SelectedChannel.Name, location = Model.PreferredJobArea, pageSize = 20 })
+

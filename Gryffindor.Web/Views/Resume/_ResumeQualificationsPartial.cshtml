@@ -1,0 +1,157 @@
+﻿<style>
+    .wizard .qualificationIcon {width: 57px;min-width: 40px;opacity:0.23;}
+    .wizard .selectedIcon{opacity:1}
+    .wizard .qualificationListItem {height: 57px; width: 16%;}
+    .wizard .postIcon {padding: 0;border-radius: 0;}
+    .content {background-color: transparent;}
+    .rightPane .qualificationListItem {width:98%}
+    .responseMessage {padding:5px; border:1px solid #f1f1f1;display:none}
+    #errorMessage{border-color:red; color:red; background:#ffd9d9}
+    #successMessage{border-color:#003500; color:#009c00; background:#b8ffa7}
+</style>
+
+<input type="hidden" id="qualType" value="0">
+
+<div class="defaultBackground wizard">
+
+    <div style="text-align:center">
+
+        <a href="#" class="qualificationOption" option="0">
+            <div class="qualificationListItem">
+                <div class="qualificationIcon gradIcon purpleBackground selectedIcon" backgroundClass="purpleBackground" text="add education history" style=""></div>
+            </div>
+        </a>
+
+        <a href="#" class="qualificationOption" option="1">
+            <div class="qualificationListItem">
+                <div class="qualificationIcon skillIcon blueBackground" backgroundClass="blueBackground" text="add a new skill" style=""></div>
+            </div>
+        </a>
+
+        <a href="#" class="qualificationOption" option="2">
+            <div class="qualificationListItem">
+                <div class="qualificationIcon achievementIcon greenBackground" backgroundClass="greenBackground" text="add new achievements" style=""></div>
+            </div>
+        </a>
+
+        <a href="#" class="qualificationOption" option="3">
+            <div class="qualificationListItem">
+                <div class="qualificationIcon workIcon paleGreenBackground" backgroundClass="paleGreenBackground" text="add work experience" style=""></div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="divSubHeading">
+    <span id="clickActionText">add your skil</span>
+</div>
+
+<div id="successMessage" class="responseMessage">Added successfully.</div>
+<div id="errorMessage" class="responseMessage">Something went wrong. Please try again</div>
+
+@using (Ajax.BeginForm("SaveQualificationAsync", "Profile", new AjaxOptions() { OnSuccess = "handleSuccess", OnFailure = "handleFailure", OnBegin = "handleBegin" }))
+{
+    <div id="qualification"><div class="loader"></div></div>
+}
+
+<div class="wizardSubNav">
+    <button id="btnBack_sub" class="btn defaultBackground btnBack">
+        Back
+    </button>
+
+    <button id="btnNext_sub" class="btn blueBackground">
+        Next
+    </button>
+</div>
+
+<script>
+
+    $(window).ready(function () {
+        $("#QualificationType").val($("#qualType").val());
+
+        qualificationTypeChange("00000000-0000-0000-0000-000000000000");
+        $("#QualificationType").change(function () {
+            qualificationTypeChange("00000000-0000-0000-0000-000000000000");
+        });
+
+        $(".qualificationIcon").click(function () {
+            var qualType = $(this).parent().parent().attr("option");
+
+            $(".qualificationIcon").removeClass("selectedIcon");
+            $(this).addClass("selectedIcon");
+
+            $("#qualType").val(qualType)
+            var currentText = $(this).attr("text");
+            $("#clickActionText").text(currentText);
+            qualificationTypeChange("00000000-0000-0000-0000-000000000000");
+        });
+
+        setupSubNav();
+    });
+
+    function qualificationTypeChange(id) {
+        $("#qualification").html("");
+        $.get("/Profile/GetQualification", { type: $("#qualType").val(), id: id }, function (html) {
+            $("#qualification").html(html);
+            $(".datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                //showButtonPanel: true,
+                yearRange: '-20:+0'
+            });
+        }).complete(function () {
+            $("button[type=submit]").removeAttr("disabled"); 
+        });
+
+        handleSuccess = function () {
+            $("#successMessage").show();
+            window.setTimeout(function () { $("#successMessage").fadeOut(); }, 5000)
+            qualificationTypeChange("00000000-0000-0000-0000-000000000000");
+        }
+
+        handleFailure = function () {
+            $("#errorMessage").show();
+            window.setTimeout(function () { $("#errorMessage").fadeOut(); }, 5000)
+        }
+
+        handleBegin = function() {
+            $("button[type=submit]").click(function () { $(this).attr("disabled", "disabled"); });
+        }
+
+        setupSubNav = function() {
+            $("#btnBack_sub").click(function () {
+                var currentStep = $("#qualType").val();
+
+                if (currentStep != 0) {
+                    currentStep = parseInt(currentStep) - 1;
+                    $('a[option="' + currentStep + '"]').find(".qualificationIcon").click();
+                }
+                else {
+                    //btnNext in Wizard.cshtml input
+                    $("#btnBack").click();
+                    $(".wizardNav").show();
+                    $(".wizardSubNav").hide();
+                }
+            });
+
+            $("#btnNext_sub").click(function () {
+                var currentStep = $("#qualType").val();
+
+                if (currentStep < 3) {
+                    currentStep = parseInt(currentStep) + 1;
+                    $('a[option="' + currentStep + '"]').find(".qualificationIcon").click();
+                }
+                else {
+                    $("#btnNext").click();
+                    $(".wizardNav").show();
+                    $(".wizardSubNav").hide();
+                }
+            });
+        }
+
+        $.get("/Profile/GetQualificationList", { type: $("#qualType").val(), selected: id }, function (html) {
+            $(".rightPane").html(html);
+            siteEvents.bindEditQualificaionEvents("true");
+        });
+    }
+</script>

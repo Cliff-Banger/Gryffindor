@@ -1,0 +1,54 @@
+﻿@model Gryffindor.Web.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+@using (Html.BeginForm("Register", "Account"))
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset>
+        <legend>New Account</legend>
+        <ol>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Name)</p>
+                @Html.TextBoxFor(m => m.Name)
+                <br>@Html.ValidationMessageFor(m => m.Name)
+            </li>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Surname)</p>
+                @Html.TextBoxFor(m => m.Surname)
+                <br>@Html.ValidationMessageFor(m => m.Surname)
+            </li>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.PreferredWorkArea)</p>
+                @Html.TextBoxFor(m => m.PreferredWorkArea)
+                <br>@Html.ValidationMessageFor(m => m.PreferredWorkArea)
+            </li>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.MainInterest)</p>
+                @Html.EnumDropDownListFor(m => m.MainInterest)
+                <br>@Html.ValidationMessageFor(m => m.MainInterest)
+            </li>
+        </ol>
+        <hr>
+        <ol>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Email)</p>
+                @Html.TextBoxFor(m => m.Email)
+                <br>@Html.ValidationMessageFor(m => m.Email)
+            </li>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Password)</p>
+                @Html.PasswordFor(m => m.Password)
+                <br>@Html.ValidationMessageFor(m => m.Password)
+            </li>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.ConfirmPassword)</p>
+                @Html.PasswordFor(m => m.ConfirmPassword)
+                <br>@Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </li>
+        </ol>
+        <input type="submit" value="Register" class="btnReg" />
+    </fieldset>
+}

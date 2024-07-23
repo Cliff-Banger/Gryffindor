@@ -1,0 +1,874 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{92CC8267-16FB-4E01-BB80-AE8B5D9426CE}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gryffindor.Web</RootNamespace>
+    <AssemblyName>Gryffindor.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Net20, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SolutionItems\WebServiceCareerjet\Newtonsoft.Json.Net20.dll</HintPath>
+    </Reference>
+    <Reference Include="NReco.PdfGenerator, Version=1.1.12.0, Culture=neutral, PublicKeyToken=231663d50a41b451, processorArchitecture=MSIL">
+      <HintPath>..\packages\NReco.PdfGenerator.1.1.12.0\lib\net20\NReco.PdfGenerator.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc5, Version=1.2.3.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc5.1.2.3\lib\net45\Unity.Mvc5.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WebService.Careerjet.Client">
+      <HintPath>..\SolutionItems\WebServiceCareerjet\WebService.Careerjet.Client.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EmailTemplateController.cs" />
+    <Compile Include="Controllers\FeedsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InboxController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
+    <Compile Include="Controllers\OrganisationController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\ResumeController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Interfaces\ISearchClientService.cs" />
+    <Compile Include="Services\SearchClientService.cs" />
+    <Compile Include="Utilities\EmailUtility.cs" />
+    <Compile Include="Helpers\Helper.cs" />
+    <Compile Include="Helpers\LoggedInUserHelper.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Membership\GryffindorMembership.cs" />
+    <Compile Include="Models\SiteViewModel.cs" />
+    <Compile Include="Models\ViewModelResult.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Interfaces\IResumePermissionClientService.cs" />
+    <Compile Include="Services\Interfaces\IUserProfileQualificationClientService.cs" />
+    <Compile Include="Services\ResumePermissionClientService.cs" />
+    <Compile Include="Services\UserFollowingClientService.cs" />
+    <Compile Include="Services\FeedClientService.cs" />
+    <Compile Include="Services\OrganisationClientService.cs" />
+    <Compile Include="Services\NotificationClientService.cs" />
+    <Compile Include="Services\Interfaces\IChannelClientService.cs" />
+    <Compile Include="Services\GeneralClientService.cs" />
+    <Compile Include="Services\Interfaces\INotificationClientService.cs" />
+    <Compile Include="Services\Interfaces\IOrganisationClientService.cs" />
+    <Compile Include="Services\Interfaces\IUserFollowingClientService.cs" />
+    <Compile Include="Services\Interfaces\IGeneralClientService.cs" />
+    <Compile Include="Services\UserProfileQualificationClientService.cs" />
+    <Compile Include="Services\UserProfileClientService.cs" />
+    <Compile Include="Services\Interfaces\IUserProfileClientService.cs" />
+    <Compile Include="Services\Interfaces\IFeedClientService.cs" />
+    <Compile Include="Services\Interfaces\ISecurityClientService.cs" />
+    <Compile Include="Services\ChannelClientService.cs" />
+    <Compile Include="Services\SecurityClientService.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\Common.cs" />
+    <Compile Include="Helpers\EmailSender.cs" />
+    <Compile Include="Utilities\HtmlCoverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Images\Ads\default.jpg" />
+    <Content Include="Content\Images\Ads\unnamed %2814%29.jpg" />
+    <Content Include="Content\Images\Ads\unnamed.jpg" />
+    <Content Include="Content\Images\Icons\bars-black.png" />
+    <Content Include="Content\Images\Icons\bars-white.png" />
+    <Content Include="Content\Images\Icons\camera-black.png" />
+    <Content Include="Content\Images\Icons\camera-white.png" />
+    <Content Include="Content\Images\Icons\comment-black.png" />
+    <Content Include="Content\Images\Icons\edit-black.png" />
+    <Content Include="Content\Images\Icons\edit-white.png" />
+    <Content Include="Content\Images\Icons\gear-black.png" />
+    <Content Include="Content\Images\Icons\Inception\Achievement-52.png" />
+    <Content Include="Content\Images\Icons\Inception\ApplicationForm-52.png" />
+    <Content Include="Content\Images\Icons\Inception\bell-52.png" />
+    <Content Include="Content\Images\Icons\Inception\Briefcase-52.png" />
+    <Content Include="Content\Images\Icons\Inception\Candidates-52.png" />
+    <Content Include="Content\Images\Icons\Inception\CreateNew-52.png" />
+    <Content Include="Content\Images\Icons\Inception\Document-52.png" />
+    <Content Include="Content\Images\Icons\Inception\Download-48.png" />
+    <Content Include="Content\Images\Icons\Inception\Edit User-52.png" />
+    <Content Include="Content\Images\Icons\Inception\Exit-52.png" />
+    <Content Include="Content\Images\Icons\Inception\Graduation-52.png" />
+    <Content Include="Content\Images\Icons\Inception\Hammer-48.png" />
+    <Content Include="Content\Images\Icons\Inception\Home-52.png" />
+    <Content Include="Content\Images\Icons\Inception\Menu-48.png" />
+    <Content Include="Content\Images\Icons\Inception\NeutralUser-52.png" />
+    <Content Include="Content\Images\Icons\Inception\Office Phone-52.png" />
+    <Content Include="Content\Images\Icons\Inception\AboutGrad.jpeg" />
+    <Content Include="Content\Images\Icons\Inception\OneFinger-52.png" />
+    <Content Include="Content\Images\Icons\Inception\School-52.png" />
+    <Content Include="Content\Images\Icons\Inception\Search-48.png" />
+    <Content Include="Content\Images\Icons\Inception\Settings-52.png" />
+    <Content Include="Content\Images\Icons\Inception\Template-52.png" />
+    <Content Include="Content\Images\Icons\Inception\ThumbUp-52.png" />
+    <Content Include="Content\Images\Icons\Inception\University-50.png" />
+    <Content Include="Content\Images\Icons\Inception\Wizard-52.png" />
+    <Content Include="Content\Images\Icons\loader.gif" />
+    <Content Include="Content\Images\Icons\mail-black.png" />
+    <Content Include="Content\Images\Icons\png\adjust.png" />
+    <Content Include="Content\Images\Icons\png\adn.png" />
+    <Content Include="Content\Images\Icons\png\align-center.png" />
+    <Content Include="Content\Images\Icons\png\align-justify.png" />
+    <Content Include="Content\Images\Icons\png\align-left.png" />
+    <Content Include="Content\Images\Icons\png\align-right.png" />
+    <Content Include="Content\Images\Icons\png\ambulance.png" />
+    <Content Include="Content\Images\Icons\png\anchor.png" />
+    <Content Include="Content\Images\Icons\png\android.png" />
+    <Content Include="Content\Images\Icons\png\angle-double-down.png" />
+    <Content Include="Content\Images\Icons\png\angle-double-left.png" />
+    <Content Include="Content\Images\Icons\png\angle-double-right.png" />
+    <Content Include="Content\Images\Icons\png\angle-double-up.png" />
+    <Content Include="Content\Images\Icons\png\angle-down.png" />
+    <Content Include="Content\Images\Icons\png\angle-left.png" />
+    <Content Include="Content\Images\Icons\png\angle-right.png" />
+    <Content Include="Content\Images\Icons\png\angle-up.png" />
+    <Content Include="Content\Images\Icons\png\apple.png" />
+    <Content Include="Content\Images\Icons\png\archive.png" />
+    <Content Include="Content\Images\Icons\png\arrow-circle-down.png" />
+    <Content Include="Content\Images\Icons\png\arrow-circle-left.png" />
+    <Content Include="Content\Images\Icons\png\arrow-circle-o-down.png" />
+    <Content Include="Content\Images\Icons\png\arrow-circle-o-left.png" />
+    <Content Include="Content\Images\Icons\png\arrow-circle-o-right.png" />
+    <Content Include="Content\Images\Icons\png\arrow-circle-o-up.png" />
+    <Content Include="Content\Images\Icons\png\arrow-circle-right.png" />
+    <Content Include="Content\Images\Icons\png\arrow-circle-up.png" />
+    <Content Include="Content\Images\Icons\png\arrow-down.png" />
+    <Content Include="Content\Images\Icons\png\arrow-left.png" />
+    <Content Include="Content\Images\Icons\png\arrow-right.png" />
+    <Content Include="Content\Images\Icons\png\arrow-up.png" />
+    <Content Include="Content\Images\Icons\png\arrows-alt.png" />
+    <Content Include="Content\Images\Icons\png\arrows-h.png" />
+    <Content Include="Content\Images\Icons\png\arrows-v.png" />
+    <Content Include="Content\Images\Icons\png\arrows.png" />
+    <Content Include="Content\Images\Icons\png\asterisk.png" />
+    <Content Include="Content\Images\Icons\png\backward.png" />
+    <Content Include="Content\Images\Icons\png\ban.png" />
+    <Content Include="Content\Images\Icons\png\bar-chart-o.png" />
+    <Content Include="Content\Images\Icons\png\barcode.png" />
+    <Content Include="Content\Images\Icons\png\bars.png" />
+    <Content Include="Content\Images\Icons\png\beer.png" />
+    <Content Include="Content\Images\Icons\png\bell-o.png" />
+    <Content Include="Content\Images\Icons\png\bell.png" />
+    <Content Include="Content\Images\Icons\png\bitbucket-square.png" />
+    <Content Include="Content\Images\Icons\png\bitbucket.png" />
+    <Content Include="Content\Images\Icons\png\bitcoin.png" />
+    <Content Include="Content\Images\Icons\png\bold.png" />
+    <Content Include="Content\Images\Icons\png\bolt.png" />
+    <Content Include="Content\Images\Icons\png\book.png" />
+    <Content Include="Content\Images\Icons\png\bookmark-o.png" />
+    <Content Include="Content\Images\Icons\png\bookmark.png" />
+    <Content Include="Content\Images\Icons\png\briefcase.png" />
+    <Content Include="Content\Images\Icons\png\bug.png" />
+    <Content Include="Content\Images\Icons\png\building-o.png" />
+    <Content Include="Content\Images\Icons\png\bullhorn.png" />
+    <Content Include="Content\Images\Icons\png\bullseye.png" />
+    <Content Include="Content\Images\Icons\png\calendar-o.png" />
+    <Content Include="Content\Images\Icons\png\calendar.png" />
+    <Content Include="Content\Images\Icons\png\camera-retro.png" />
+    <Content Include="Content\Images\Icons\png\camera.png" />
+    <Content Include="Content\Images\Icons\png\caret-down.png" />
+    <Content Include="Content\Images\Icons\png\caret-left.png" />
+    <Content Include="Content\Images\Icons\png\caret-right.png" />
+    <Content Include="Content\Images\Icons\png\caret-up.png" />
+    <Content Include="Content\Images\Icons\png\certificate.png" />
+    <Content Include="Content\Images\Icons\png\check-circle-o.png" />
+    <Content Include="Content\Images\Icons\png\check-circle.png" />
+    <Content Include="Content\Images\Icons\png\check-square-o.png" />
+    <Content Include="Content\Images\Icons\png\check-square.png" />
+    <Content Include="Content\Images\Icons\png\check.png" />
+    <Content Include="Content\Images\Icons\png\chevron-circle-down.png" />
+    <Content Include="Content\Images\Icons\png\chevron-circle-left.png" />
+    <Content Include="Content\Images\Icons\png\chevron-circle-right.png" />
+    <Content Include="Content\Images\Icons\png\chevron-circle-up.png" />
+    <Content Include="Content\Images\Icons\png\chevron-down.png" />
+    <Content Include="Content\Images\Icons\png\chevron-left.png" />
+    <Content Include="Content\Images\Icons\png\chevron-right.png" />
+    <Content Include="Content\Images\Icons\png\chevron-up.png" />
+    <Content Include="Content\Images\Icons\png\circle-o.png" />
+    <Content Include="Content\Images\Icons\png\circle.png" />
+    <Content Include="Content\Images\Icons\png\clipboard.png" />
+    <Content Include="Content\Images\Icons\png\clock-o.png" />
+    <Content Include="Content\Images\Icons\png\cloud-download.png" />
+    <Content Include="Content\Images\Icons\png\cloud-upload.png" />
+    <Content Include="Content\Images\Icons\png\cloud.png" />
+    <Content Include="Content\Images\Icons\png\code-fork.png" />
+    <Content Include="Content\Images\Icons\png\code.png" />
+    <Content Include="Content\Images\Icons\png\coffee.png" />
+    <Content Include="Content\Images\Icons\png\columns.png" />
+    <Content Include="Content\Images\Icons\png\comment-o.png" />
+    <Content Include="Content\Images\Icons\png\comment.png" />
+    <Content Include="Content\Images\Icons\png\comments-o.png" />
+    <Content Include="Content\Images\Icons\png\comments.png" />
+    <Content Include="Content\Images\Icons\png\compass.png" />
+    <Content Include="Content\Images\Icons\png\compress.png" />
+    <Content Include="Content\Images\Icons\png\credit-card.png" />
+    <Content Include="Content\Images\Icons\png\crop.png" />
+    <Content Include="Content\Images\Icons\png\crosshairs.png" />
+    <Content Include="Content\Images\Icons\png\css3.png" />
+    <Content Include="Content\Images\Icons\png\cutlery.png" />
+    <Content Include="Content\Images\Icons\png\dashboard.png" />
+    <Content Include="Content\Images\Icons\png\dedent.png" />
+    <Content Include="Content\Images\Icons\png\desktop.png" />
+    <Content Include="Content\Images\Icons\png\dot-circle-o.png" />
+    <Content Include="Content\Images\Icons\png\download.png" />
+    <Content Include="Content\Images\Icons\png\dribbble.png" />
+    <Content Include="Content\Images\Icons\png\dropbox.png" />
+    <Content Include="Content\Images\Icons\png\edit.png" />
+    <Content Include="Content\Images\Icons\png\eject.png" />
+    <Content Include="Content\Images\Icons\png\ellipsis-h.png" />
+    <Content Include="Content\Images\Icons\png\ellipsis-v.png" />
+    <Content Include="Content\Images\Icons\png\envelope-o.png" />
+    <Content Include="Content\Images\Icons\png\envelope.png" />
+    <Content Include="Content\Images\Icons\png\eraser.png" />
+    <Content Include="Content\Images\Icons\png\euro.png" />
+    <Content Include="Content\Images\Icons\png\exchange.png" />
+    <Content Include="Content\Images\Icons\png\exclamation-circle.png" />
+    <Content Include="Content\Images\Icons\png\exclamation-triangle.png" />
+    <Content Include="Content\Images\Icons\png\exclamation.png" />
+    <Content Include="Content\Images\Icons\png\expand.png" />
+    <Content Include="Content\Images\Icons\png\external-link-square.png" />
+    <Content Include="Content\Images\Icons\png\external-link.png" />
+    <Content Include="Content\Images\Icons\png\external-link3.png" />
+    <Content Include="Content\Images\Icons\png\eye-slash.png" />
+    <Content Include="Content\Images\Icons\png\eye.png" />
+    <Content Include="Content\Images\Icons\png\facebook-square.png" />
+    <Content Include="Content\Images\Icons\png\facebook.png" />
+    <Content Include="Content\Images\Icons\png\facebook3.png" />
+    <Content Include="Content\Images\Icons\png\fast-backward.png" />
+    <Content Include="Content\Images\Icons\png\fast-forward.png" />
+    <Content Include="Content\Images\Icons\png\female.png" />
+    <Content Include="Content\Images\Icons\png\fighter-jet.png" />
+    <Content Include="Content\Images\Icons\png\file-o.png" />
+    <Content Include="Content\Images\Icons\png\file-text-o.png" />
+    <Content Include="Content\Images\Icons\png\file-text.png" />
+    <Content Include="Content\Images\Icons\png\file.png" />
+    <Content Include="Content\Images\Icons\png\files-o.png" />
+    <Content Include="Content\Images\Icons\png\film.png" />
+    <Content Include="Content\Images\Icons\png\filter.png" />
+    <Content Include="Content\Images\Icons\png\fire-extinguisher.png" />
+    <Content Include="Content\Images\Icons\png\fire.png" />
+    <Content Include="Content\Images\Icons\png\flag-checkered.png" />
+    <Content Include="Content\Images\Icons\png\flag-o.png" />
+    <Content Include="Content\Images\Icons\png\flag.png" />
+    <Content Include="Content\Images\Icons\png\flask.png" />
+    <Content Include="Content\Images\Icons\png\flickr.png" />
+    <Content Include="Content\Images\Icons\png\folder-o.png" />
+    <Content Include="Content\Images\Icons\png\folder-open-o.png" />
+    <Content Include="Content\Images\Icons\png\folder-open.png" />
+    <Content Include="Content\Images\Icons\png\folder.png" />
+    <Content Include="Content\Images\Icons\png\font.png" />
+    <Content Include="Content\Images\Icons\png\forward.png" />
+    <Content Include="Content\Images\Icons\png\foursquare.png" />
+    <Content Include="Content\Images\Icons\png\frown-o.png" />
+    <Content Include="Content\Images\Icons\png\gamepad.png" />
+    <Content Include="Content\Images\Icons\png\gavel.png" />
+    <Content Include="Content\Images\Icons\png\gbp.png" />
+    <Content Include="Content\Images\Icons\png\gear.png" />
+    <Content Include="Content\Images\Icons\png\gears.png" />
+    <Content Include="Content\Images\Icons\png\gift.png" />
+    <Content Include="Content\Images\Icons\png\github-alt.png" />
+    <Content Include="Content\Images\Icons\png\github-square.png" />
+    <Content Include="Content\Images\Icons\png\github.png" />
+    <Content Include="Content\Images\Icons\png\gittip.png" />
+    <Content Include="Content\Images\Icons\png\glass.png" />
+    <Content Include="Content\Images\Icons\png\globe.png" />
+    <Content Include="Content\Images\Icons\png\globe3.png" />
+    <Content Include="Content\Images\Icons\png\google-plus-square.png" />
+    <Content Include="Content\Images\Icons\png\google-plus.png" />
+    <Content Include="Content\Images\Icons\png\group.png" />
+    <Content Include="Content\Images\Icons\png\h-square.png" />
+    <Content Include="Content\Images\Icons\png\hand-o-down.png" />
+    <Content Include="Content\Images\Icons\png\hand-o-left.png" />
+    <Content Include="Content\Images\Icons\png\hand-o-right.png" />
+    <Content Include="Content\Images\Icons\png\hand-o-up.png" />
+    <Content Include="Content\Images\Icons\png\hdd-o.png" />
+    <Content Include="Content\Images\Icons\png\headphones.png" />
+    <Content Include="Content\Images\Icons\png\heart-o.png" />
+    <Content Include="Content\Images\Icons\png\heart.png" />
+    <Content Include="Content\Images\Icons\png\home.png" />
+    <Content Include="Content\Images\Icons\png\hospital-o.png" />
+    <Content Include="Content\Images\Icons\png\html5.png" />
+    <Content Include="Content\Images\Icons\png\i00.png" />
+    <Content Include="Content\Images\Icons\png\i01.png" />
+    <Content Include="Content\Images\Icons\png\i02.png" />
+    <Content Include="Content\Images\Icons\png\i03.png" />
+    <Content Include="Content\Images\Icons\png\i04.png" />
+    <Content Include="Content\Images\Icons\png\i05.png" />
+    <Content Include="Content\Images\Icons\png\i06.png" />
+    <Content Include="Content\Images\Icons\png\i07.png" />
+    <Content Include="Content\Images\Icons\png\i08.png" />
+    <Content Include="Content\Images\Icons\png\i09.png" />
+    <Content Include="Content\Images\Icons\png\inbox.png" />
+    <Content Include="Content\Images\Icons\png\indent.png" />
+    <Content Include="Content\Images\Icons\png\info-circle.png" />
+    <Content Include="Content\Images\Icons\png\info.png" />
+    <Content Include="Content\Images\Icons\png\inr.png" />
+    <Content Include="Content\Images\Icons\png\instagram.png" />
+    <Content Include="Content\Images\Icons\png\italic.png" />
+    <Content Include="Content\Images\Icons\png\jpy.png" />
+    <Content Include="Content\Images\Icons\png\key.png" />
+    <Content Include="Content\Images\Icons\png\keyboard-o.png" />
+    <Content Include="Content\Images\Icons\png\krw.png" />
+    <Content Include="Content\Images\Icons\png\laptop.png" />
+    <Content Include="Content\Images\Icons\png\leaf.png" />
+    <Content Include="Content\Images\Icons\png\lemon-o.png" />
+    <Content Include="Content\Images\Icons\png\level-down.png" />
+    <Content Include="Content\Images\Icons\png\level-up.png" />
+    <Content Include="Content\Images\Icons\png\lightbulb-o.png" />
+    <Content Include="Content\Images\Icons\png\link.png" />
+    <Content Include="Content\Images\Icons\png\linkedin-square.png" />
+    <Content Include="Content\Images\Icons\png\linkedin.png" />
+    <Content Include="Content\Images\Icons\png\linux.png" />
+    <Content Include="Content\Images\Icons\png\list-alt.png" />
+    <Content Include="Content\Images\Icons\png\list-ol.png" />
+    <Content Include="Content\Images\Icons\png\list-ul.png" />
+    <Content Include="Content\Images\Icons\png\list.png" />
+    <Content Include="Content\Images\Icons\png\location-arrow.png" />
+    <Content Include="Content\Images\Icons\png\lock.png" />
+    <Content Include="Content\Images\Icons\png\long-arrow-down.png" />
+    <Content Include="Content\Images\Icons\png\long-arrow-left.png" />
+    <Content Include="Content\Images\Icons\png\long-arrow-right.png" />
+    <Content Include="Content\Images\Icons\png\long-arrow-up.png" />
+    <Content Include="Content\Images\Icons\png\magic.png" />
+    <Content Include="Content\Images\Icons\png\magnet.png" />
+    <Content Include="Content\Images\Icons\png\mail-forward.png" />
+    <Content Include="Content\Images\Icons\png\mail-reply-all.png" />
+    <Content Include="Content\Images\Icons\png\mail-reply.png" />
+    <Content Include="Content\Images\Icons\png\male.png" />
+    <Content Include="Content\Images\Icons\png\map-marker.png" />
+    <Content Include="Content\Images\Icons\png\maxcdn.png" />
+    <Content Include="Content\Images\Icons\png\medkit.png" />
+    <Content Include="Content\Images\Icons\png\meh-o.png" />
+    <Content Include="Content\Images\Icons\png\microphone-slash.png" />
+    <Content Include="Content\Images\Icons\png\microphone.png" />
+    <Content Include="Content\Images\Icons\png\minus-circle.png" />
+    <Content Include="Content\Images\Icons\png\minus-square-o.png" />
+    <Content Include="Content\Images\Icons\png\minus-square.png" />
+    <Content Include="Content\Images\Icons\png\minus.png" />
+    <Content Include="Content\Images\Icons\png\mobile.png" />
+    <Content Include="Content\Images\Icons\png\money.png" />
+    <Content Include="Content\Images\Icons\png\moon-o.png" />
+    <Content Include="Content\Images\Icons\png\music.png" />
+    <Content Include="Content\Images\Icons\png\pagelines.png" />
+    <Content Include="Content\Images\Icons\png\paperclip.png" />
+    <Content Include="Content\Images\Icons\png\pause.png" />
+    <Content Include="Content\Images\Icons\png\pencil-square.png" />
+    <Content Include="Content\Images\Icons\png\pencil.png" />
+    <Content Include="Content\Images\Icons\png\phone-square.png" />
+    <Content Include="Content\Images\Icons\png\phone.png" />
+    <Content Include="Content\Images\Icons\png\picture-o.png" />
+    <Content Include="Content\Images\Icons\png\pinterest-square.png" />
+    <Content Include="Content\Images\Icons\png\pinterest.png" />
+    <Content Include="Content\Images\Icons\png\plane.png" />
+    <Content Include="Content\Images\Icons\png\play-circle-o.png" />
+    <Content Include="Content\Images\Icons\png\play-circle.png" />
+    <Content Include="Content\Images\Icons\png\play.png" />
+    <Content Include="Content\Images\Icons\png\plus-circle.png" />
+    <Content Include="Content\Images\Icons\png\plus-square-o.png" />
+    <Content Include="Content\Images\Icons\png\plus-square.png" />
+    <Content Include="Content\Images\Icons\png\plus.png" />
+    <Content Include="Content\Images\Icons\png\power-off.png" />
+    <Content Include="Content\Images\Icons\png\print.png" />
+    <Content Include="Content\Images\Icons\png\puzzle-piece.png" />
+    <Content Include="Content\Images\Icons\png\qrcode.png" />
+    <Content Include="Content\Images\Icons\png\question-circle.png" />
+    <Content Include="Content\Images\Icons\png\question.png" />
+    <Content Include="Content\Images\Icons\png\quote-left.png" />
+    <Content Include="Content\Images\Icons\png\quote-right.png" />
+    <Content Include="Content\Images\Icons\png\random.png" />
+    <Content Include="Content\Images\Icons\png\refresh.png" />
+    <Content Include="Content\Images\Icons\png\retweet.png" />
+    <Content Include="Content\Images\Icons\png\road.png" />
+    <Content Include="Content\Images\Icons\png\rocket.png" />
+    <Content Include="Content\Images\Icons\png\rotate-right.png" />
+    <Content Include="Content\Images\Icons\png\rss-square.png" />
+    <Content Include="Content\Images\Icons\png\rss.png" />
+    <Content Include="Content\Images\Icons\png\rub.png" />
+    <Content Include="Content\Images\Icons\png\save.png" />
+    <Content Include="Content\Images\Icons\png\scissors.png" />
+    <Content Include="Content\Images\Icons\png\search-minus.png" />
+    <Content Include="Content\Images\Icons\png\search-plus.png" />
+    <Content Include="Content\Images\Icons\png\search.png" />
+    <Content Include="Content\Images\Icons\png\share-square-o.png" />
+    <Content Include="Content\Images\Icons\png\share-square.png" />
+    <Content Include="Content\Images\Icons\png\shield.png" />
+    <Content Include="Content\Images\Icons\png\shopping-cart.png" />
+    <Content Include="Content\Images\Icons\png\sign-in.png" />
+    <Content Include="Content\Images\Icons\png\sign-out.png" />
+    <Content Include="Content\Images\Icons\png\signal.png" />
+    <Content Include="Content\Images\Icons\png\sitemap.png" />
+    <Content Include="Content\Images\Icons\png\skype.png" />
+    <Content Include="Content\Images\Icons\png\smile-o.png" />
+    <Content Include="Content\Images\Icons\png\sort-alpha-asc.png" />
+    <Content Include="Content\Images\Icons\png\sort-alpha-desc.png" />
+    <Content Include="Content\Images\Icons\png\sort-amount-asc.png" />
+    <Content Include="Content\Images\Icons\png\sort-amount-desc.png" />
+    <Content Include="Content\Images\Icons\png\sort-down.png" />
+    <Content Include="Content\Images\Icons\png\sort-numeric-asc.png" />
+    <Content Include="Content\Images\Icons\png\sort-numeric-desc.png" />
+    <Content Include="Content\Images\Icons\png\sort-up.png" />
+    <Content Include="Content\Images\Icons\png\sort.png" />
+    <Content Include="Content\Images\Icons\png\spinner.png" />
+    <Content Include="Content\Images\Icons\png\square-o.png" />
+    <Content Include="Content\Images\Icons\png\square.png" />
+    <Content Include="Content\Images\Icons\png\stack-exchange.png" />
+    <Content Include="Content\Images\Icons\png\stack-overflow.png" />
+    <Content Include="Content\Images\Icons\png\star-half-o.png" />
+    <Content Include="Content\Images\Icons\png\star-half.png" />
+    <Content Include="Content\Images\Icons\png\star-o.png" />
+    <Content Include="Content\Images\Icons\png\star.png" />
+    <Content Include="Content\Images\Icons\png\step-backward.png" />
+    <Content Include="Content\Images\Icons\png\step-forward.png" />
+    <Content Include="Content\Images\Icons\png\stethoscope.png" />
+    <Content Include="Content\Images\Icons\png\stop.png" />
+    <Content Include="Content\Images\Icons\png\strikethrough.png" />
+    <Content Include="Content\Images\Icons\png\subscript.png" />
+    <Content Include="Content\Images\Icons\png\suitcase.png" />
+    <Content Include="Content\Images\Icons\png\sun-o.png" />
+    <Content Include="Content\Images\Icons\png\superscript.png" />
+    <Content Include="Content\Images\Icons\png\table.png" />
+    <Content Include="Content\Images\Icons\png\tablet.png" />
+    <Content Include="Content\Images\Icons\png\tag.png" />
+    <Content Include="Content\Images\Icons\png\tags.png" />
+    <Content Include="Content\Images\Icons\png\terminal.png" />
+    <Content Include="Content\Images\Icons\png\text-height.png" />
+    <Content Include="Content\Images\Icons\png\text-width.png" />
+    <Content Include="Content\Images\Icons\png\th-large.png" />
+    <Content Include="Content\Images\Icons\png\th-list.png" />
+    <Content Include="Content\Images\Icons\png\th.png" />
+    <Content Include="Content\Images\Icons\png\thumb-tack.png" />
+    <Content Include="Content\Images\Icons\png\thumbs-o-down.png" />
+    <Content Include="Content\Images\Icons\png\thumbs-o-up.png" />
+    <Content Include="Content\Images\Icons\png\thumbs-thumb.png" />
+    <Content Include="Content\Images\Icons\png\thumbs-up.png" />
+    <Content Include="Content\Images\Icons\png\ticket.png" />
+    <Content Include="Content\Images\Icons\png\times-circle-o.png" />
+    <Content Include="Content\Images\Icons\png\times-circle.png" />
+    <Content Include="Content\Images\Icons\png\times.png" />
+    <Content Include="Content\Images\Icons\png\tint.png" />
+    <Content Include="Content\Images\Icons\png\toggle-down.png" />
+    <Content Include="Content\Images\Icons\png\toggle-left.png" />
+    <Content Include="Content\Images\Icons\png\toggle-right.png" />
+    <Content Include="Content\Images\Icons\png\toggle-up.png" />
+    <Content Include="Content\Images\Icons\png\trash-o.png" />
+    <Content Include="Content\Images\Icons\png\trello.png" />
+    <Content Include="Content\Images\Icons\png\truck.png" />
+    <Content Include="Content\Images\Icons\png\tumblr-square.png" />
+    <Content Include="Content\Images\Icons\png\tumblr.png" />
+    <Content Include="Content\Images\Icons\png\turkish-lira.png" />
+    <Content Include="Content\Images\Icons\png\twitter-square.png" />
+    <Content Include="Content\Images\Icons\png\twitter.png" />
+    <Content Include="Content\Images\Icons\png\umbrella.png" />
+    <Content Include="Content\Images\Icons\png\underline.png" />
+    <Content Include="Content\Images\Icons\png\undo.png" />
+    <Content Include="Content\Images\Icons\png\unlink.png" />
+    <Content Include="Content\Images\Icons\png\unlock-alt.png" />
+    <Content Include="Content\Images\Icons\png\upload.png" />
+    <Content Include="Content\Images\Icons\png\usd.png" />
+    <Content Include="Content\Images\Icons\png\user-md.png" />
+    <Content Include="Content\Images\Icons\png\user.png" />
+    <Content Include="Content\Images\Icons\png\video-camera.png" />
+    <Content Include="Content\Images\Icons\png\vimeo-square.png" />
+    <Content Include="Content\Images\Icons\png\vk.png" />
+    <Content Include="Content\Images\Icons\png\vk3.png" />
+    <Content Include="Content\Images\Icons\png\volume-down.png" />
+    <Content Include="Content\Images\Icons\png\volume-off.png" />
+    <Content Include="Content\Images\Icons\png\volume-up.png" />
+    <Content Include="Content\Images\Icons\png\weibo.png" />
+    <Content Include="Content\Images\Icons\png\wheelchair.png" />
+    <Content Include="Content\Images\Icons\png\windows.png" />
+    <Content Include="Content\Images\Icons\png\wrench.png" />
+    <Content Include="Content\Images\Icons\png\xing-square.png" />
+    <Content Include="Content\Images\Icons\png\xing.png" />
+    <Content Include="Content\Images\Icons\png\youtube-play.png" />
+    <Content Include="Content\Images\Icons\png\youtube-square.png" />
+    <Content Include="Content\Images\Icons\png\youtube.png" />
+    <Content Include="Content\Images\Icons\refresh-black.png" />
+    <Content Include="Content\Images\Icons\search-black.png" />
+    <Content Include="Content\Images\Icons\star-black.png" />
+    <Content Include="Content\Images\Icons\user-black.png" />
+    <Content Include="Content\Images\ResumeTemplates\ResumeTemplate_0.JPG" />
+    <Content Include="Content\Images\SamplePhotos\1.jpg" />
+    <Content Include="Content\Images\SamplePhotos\10.jpg" />
+    <Content Include="Content\Images\SamplePhotos\2.jpg" />
+    <Content Include="Content\Images\SamplePhotos\3.jpg" />
+    <Content Include="Content\Images\SamplePhotos\4.jpg" />
+    <Content Include="Content\Images\SamplePhotos\5.jpg" />
+    <Content Include="Content\Images\SamplePhotos\6.jpg" />
+    <Content Include="Content\Images\SamplePhotos\7.jpg" />
+    <Content Include="Content\Images\SamplePhotos\8.jpg" />
+    <Content Include="Content\Images\SamplePhotos\9.jpg" />
+    <Content Include="Content\Images\SamplePhotos\default.png" />
+    <Content Include="Content\Images\SamplePhotos\Mobile\1.jpg" />
+    <Content Include="Content\Images\SamplePhotos\Mobile\10.jpg" />
+    <Content Include="Content\Images\SamplePhotos\Mobile\2.jpg" />
+    <Content Include="Content\Images\SamplePhotos\Mobile\3.jpg" />
+    <Content Include="Content\Images\SamplePhotos\Mobile\4.jpg" />
+    <Content Include="Content\Images\SamplePhotos\Mobile\5.jpg" />
+    <Content Include="Content\Images\SamplePhotos\Mobile\6.jpg" />
+    <Content Include="Content\Images\SamplePhotos\Mobile\7.jpg" />
+    <Content Include="Content\Images\SamplePhotos\Mobile\8.jpg" />
+    <Content Include="Content\Images\SamplePhotos\Mobile\9.jpg" />
+    <Content Include="Content\Images\SamplePhotos\Mobile\Picture1.jpg" />
+    <Content Include="Content\Images\SamplePhotos\Mobile\Picture2.jpg" />
+    <Content Include="Content\Images\SamplePhotos\Picture1.jpg" />
+    <Content Include="Content\Images\SamplePhotos\Picture2.jpg" />
+    <Content Include="Content\Scripts\Site.js" />
+    <Content Include="Content\Scripts\swiper.jquery.min.js" />
+    <Content Include="Content\Scripts\swiper.min.js" />
+    <Content Include="Content\Styles\Site_Media.css" />
+    <Content Include="Content\Styles\swiper.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Styles\Site.css" />
+    <Content Include="Content\Fonts\bellerose\Bellerose.ttf" />
+    <None Include="Content\Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Content\Scripts\jquery-1.10.2.js" />
+    <Content Include="Content\Scripts\jquery-1.10.2.min.js" />
+    <None Include="Content\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Content\Scripts\jquery.validate.js" />
+    <Content Include="Content\Scripts\jquery.validate.min.js" />
+    <Content Include="Content\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\Scripts\modernizr-2.6.2.js" />
+    <Content Include="Content\Scripts\_references.js" />
+    <Content Include="Content\Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Content\Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Inbox\Index.cshtml" />
+    <Content Include="Views\Notifications\Index.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Shared\_Preparation.cshtml" />
+    <Content Include="Views\Shared\_RightPane.cshtml" />
+    <Content Include="Views\Shared\_LeftPane.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutAccount.cshtml" />
+    <Content Include="Views\Account\_RegisterPartial.cshtml" />
+    <Content Include="Views\Account\_LoginPartial.cshtml" />
+    <Content Include="Views\Account\_ImageCollagePartial.cshtml" />
+    <Content Include="Views\Feeds\_PostedFeed.cshtml" />
+    <Content Include="Views\Feeds\_SponsoredFeed.cshtml" />
+    <Content Include="Views\Feeds\_JobFeed.cshtml" />
+    <Content Include="Views\Feeds\_JobFeed_CareerJet.cshtml" />
+    <Content Include="Views\Feeds\PostFeed.cshtml" />
+    <Content Include="Views\Profile\_Channels.cshtml" />
+    <Content Include="Views\Profile\Interests.cshtml" />
+    <Content Include="Views\Feeds\BrowseFeeds.cshtml" />
+    <Content Include="Views\Home\_Channels.cshtml" />
+    <Content Include="Views\Feeds\Index.cshtml" />
+    <Content Include="Views\Feeds\Feeds.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Shared\_LogoutPartial.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Profile\Profession.cshtml" />
+    <Content Include="Views\Profile\_ProfessionPartial.cshtml" />
+    <Content Include="Views\Feeds\_ProfileFeed.cshtml" />
+    <None Include="Properties\PublishProfiles\Inception.pubxml" />
+    <Content Include="Views\Home\Privacy.cshtml" />
+    <Content Include="Views\Home\TermsAndConditions.cshtml" />
+    <Content Include="Views\Organisation\Index.cshtml" />
+    <Content Include="Views\Organisation\View.cshtml" />
+    <Content Include="Views\Organisation\New.cshtml" />
+    <Content Include="Views\Organisation\Edit.cshtml" />
+    <Content Include="Views\Notifications\_NotificationsPartial.cshtml" />
+    <Content Include="Views\Profile\_AddEducationPartial.cshtml" />
+    <Content Include="Views\Profile\_AddSkillPartial.cshtml" />
+    <Content Include="Views\Profile\_AddWorkPartial.cshtml" />
+    <Content Include="Views\Profile\_AddAchievementPartial.cshtml" />
+    <Content Include="Views\Resume\Index.cshtml" />
+    <Content Include="Views\Profile\Qualifications.cshtml" />
+    <Content Include="Views\Profile\_ListOfEducationPartial.cshtml" />
+    <Content Include="Views\Profile\_ListOfWorkPartial.cshtml" />
+    <Content Include="Views\Profile\_ListOfAchievementsPartial.cshtml" />
+    <Content Include="Views\Profile\_ListOfSkillsPartial.cshtml" />
+    <Content Include="Views\Home\_About.cshtml" />
+    <Content Include="Views\Resume\_ResumeDesign_0.cshtml" />
+    <Content Include="Views\EmailTemplate\ForgotPasswordTemplate.cshtml" />
+    <Content Include="Views\Resume\Preview.cshtml" />
+    <Content Include="Views\Resume\_ResumeSharePartial.cshtml" />
+    <Content Include="Views\Profile\_EditQualificationItem.cshtml" />
+    <Content Include="Views\Resume\_ResumeStatusPartial.cshtml" />
+    <Content Include="Views\EmailTemplate\WelcomeTemplate.cshtml" />
+    <Content Include="Views\EmailTemplate\JobInterestTemplate.cshtml" />
+    <Content Include="Views\EmailTemplate\CandidateInterestTemplate.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordTemplate.cshtml" />
+    <Content Include="Views\Resume\_ResumeDesignPickerPartial.cshtml" />
+    <Content Include="Views\Resume\Wizard.cshtml" />
+    <Content Include="Views\Resume\_ResumeDesign_1.cshtml" />
+    <Content Include="Views\Resume\_ResumeDesign_3.cshtml" />
+    <Content Include="Views\Resume\_ResumeQualificationsPartial.cshtml" />
+    <Content Include="Views\Resume\_ResumePersonalInfoPartial.cshtml" />
+    <Content Include="Views\Shared\_TitleBar.cshtml" />
+    <Content Include="Views\Feeds\Jobs.cshtml" />
+    <Content Include="Views\Feeds\_JobFeedBanner_CareerJet.cshtml" />
+    <Content Include="Views\Shared\_ActionBar.cshtml" />
+    <Content Include="Views\Shared\_SearchBar.cshtml" />
+    <Content Include="Views\Search\Results.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+    <Content Include="Content\Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gryffindor.Contract\Gryffindor.Contract.csproj">
+      <Project>{a16a6a14-7286-4b6b-a393-254d7cf23ab1}</Project>
+      <Name>Gryffindor.Contract</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50985</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50687/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

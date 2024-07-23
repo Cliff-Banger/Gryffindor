@@ -1,0 +1,152 @@
+﻿@model Gryffindor.Web.Models.UserProfileViewModel
+@{
+    ViewBag.Title = Model.Profile.FirstName + " " + Model.Profile.Surname;
+    var mainInterest = (Gryffindor.Contract.Enums.MainInterest)Model.Profile.MainInterest;
+    var myEyesOnly = !Model.IsMe && Model.Profile.IsPrivate;
+}
+@if (myEyesOnly)
+{
+    <input type="hidden" id="selected" value="00000000-0000-0000-0000-000000000000">
+}
+else
+{
+    <input type="hidden" id="selected" value="@Model.Profile.GryffindorUserId">
+}
+
+
+<div class="divHeading">@Model.Profile.FirstName @Model.Profile.Surname</div> 
+@if (Model.IsMe)
+{
+<a href="@Url.Action("Edit", "Profile")" class="btn greenBackground" style="padding:8px">Edit</a>
+@*<a href="@Url.Action("Experience", "Profile")" class="btn greenBackground" style="padding:8px">Education/Work</a>*@
+}
+else
+{
+    @*<a href="@Url.Action("Edit", "Profile")" class="btn greenBackground" style="padding:8px">Follow</a>*@
+}
+<hr>
+@{ 
+    var avatarFileName = !string.IsNullOrEmpty(Model.Profile.Avatar) ? Path.GetFileName(Model.Profile.Avatar) : "";
+    var avatar = string.IsNullOrEmpty(avatarFileName) ? "/Content/Images/SamplePhotos/default.png" : Model.Profile.Avatar;
+    var coverAvatar = (string.IsNullOrEmpty(avatarFileName)) ? avatar : avatar.Replace(avatarFileName, "cover_" + avatarFileName.Replace("profile_", ""));
+}
+<div class="message">@ViewBag.Message</div>
+<div class="profileAvatarContainer" style="background-image:url(@coverAvatar);">
+    <img src="@avatar">
+</div>
+<br>
+<div class="quickInfo">
+    @if (!Model.IsMe)
+    {
+        <div class="follow greenBackground" id="@Model.Profile.GryffindorUserId" style="padding:8px">Follow</div>
+    }
+    else
+    {
+        <a style="margin:2px;padding: 8px;display:none; float:right" id="downloadCV" href="@Url.Action("DownloadUserResume", "Resume", new { username = Model.Profile.Username })" class="button paleGreenBackground">View CV</a>
+    }
+
+</div>
+<br>
+<div class="divSubHeading">About</div>
+<hr>
+
+<div style="color:#f1f1f1">
+    @if (myEyesOnly)
+    {
+        <p>Email is private</p>
+    }
+    else
+    {
+        <p>@Model.Profile.PreferredEmail</p>
+    }
+    <p>Interested in @Model.Profile.PreferredProfession @mainInterest around @Model.Profile.PreferredWorkArea</p>
+    <hr>
+    <p>@Model.Profile.Bio</p>
+</div>
+
+<div id="education"><div class="loader"></div></div>
+
+@if (Model.IsMe)
+{
+<a href="@Url.Action("Qualifications","Profile", new { option = 0 })">
+    <div class="qualificationListItemAdd">
+        <div class="qualificationIcon gradIcon" style="background-color:#dcdcdc"></div>
+        <div class="qualificationInfo" style="vertical-align:middle">
+            <div style="font-size:18px;color:#7B7B7B"><b>Add Education</b></div>
+        </div>
+    </div>
+</a>
+}
+<br><br>
+<div id="skills"><div class="loader"></div></div>
+@if (Model.IsMe)
+{
+<a href="@Url.Action("Qualifications","Profile", new { option = 1 })">
+    <div class="qualificationListItemAdd">
+        <div class="qualificationIcon skillIcon" style="background-color:#dcdcdc"></div>
+        <div class="qualificationInfo" style="vertical-align:middle">
+            <div style="font-size:18px;color:#7B7B7B"><b>Add Skill</b></div>
+        </div>
+    </div>
+</a>
+}
+<br><br>
+<div id="achievements"><div class="loader"></div></div>
+@if (Model.IsMe)
+{
+    <a href="@Url.Action("Qualifications","Profile", new { option = 2 })">
+        <div class="qualificationListItemAdd">
+            <div class="qualificationIcon achievementIcon" style="background-color:#dcdcdc"></div>
+            <div class="qualificationInfo" style="vertical-align:middle">
+                <div style="font-size:18px;color:#7B7B7B"><b>Add Achievement</b></div>
+            </div>
+        </div>
+    </a>
+}
+<br><br>
+<div id="work"><div class="loader"></div></div>
+@if (Model.IsMe)
+{
+    <a href="@Url.Action("Qualifications","Profile", new { option = 3 })">
+        <div class="qualificationListItemAdd">
+            <div class="qualificationIcon workIcon" style="background-color:#dcdcdc"></div>
+            <div class="qualificationInfo" style="vertical-align:middle">
+                <div style="font-size:18px;color:#7B7B7B"><b>Add Work Experience</b></div>
+            </div>
+        </div>
+    </a>
+}
+<br><br>
+@Html.Partial("~/Views/Profile/_EditQualificationItem.cshtml")
+<script>
+    $(window).ready(function () {
+
+        $.get("/Resume/CanDownloadResume/", { id: "00000000-0000-0000-0000-000000000000", username: "" }, function (result) {
+            if (result.toLowerCase() == "true")
+                $("#downloadCV").show();
+            else
+                $("#downloadCV").remove();
+        });
+
+        if ($(".follow").length)
+            sitePageLoadActions.checkFollowing();
+        siteEvents.bindFollowEvents();
+
+        $.get("/Profile/GetQualificationList", { type: 0, selected: $("#selected").val() }, function (html) {
+            $("#education").html(html);
+            siteEvents.bindEditQualificaionEvents(@Model.IsMe.ToString().ToLower());
+        });
+        $.get("/Profile/GetQualificationList", { type: 1, selected: $("#selected").val() }, function (html) {
+            $("#skills").html(html);
+            siteEvents.bindEditQualificaionEvents(@Model.IsMe.ToString().ToLower());
+        });
+        $.get("/Profile/GetQualificationList", { type: 2, selected: $("#selected").val() }, function (html) {
+            $("#achievements").html(html);
+            siteEvents.bindEditQualificaionEvents(@Model.IsMe.ToString().ToLower());
+        });
+        $.get("/Profile/GetQualificationList", { type: 3, selected: $("#selected").val() }, function (html) {
+            $("#work").html(html);
+            siteEvents.bindEditQualificaionEvents(@Model.IsMe.ToString().ToLower());
+        });
+    });
+</script>

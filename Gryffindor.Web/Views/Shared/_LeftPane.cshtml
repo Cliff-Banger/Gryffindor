@@ -1,0 +1,35 @@
+﻿<aside class="leftPane">
+    <a href="@Url.Action("Index","Profile")">
+        <div class="tile" style="width:inherit">
+            <img id="sideAvatar" class="sideAvatar" src="/Content/Images/SamplePhotos/default.png" style="width:100%"/>
+            <p class="nameSurname"><span class="name"></span> <span class="surname"></span></p>
+            <p>Manage profile, education history, work, achievements</p>
+        </div>
+    </a>
+    <!--<a href="#" id="btnPreparation">
+        <div class="tile">
+            <h5>Preparation</h5>
+        </div>
+    </a>-->
+</aside>
+<script>
+    $(window).ready(function () {
+        $.ajax({
+            url: "/Profile/GetUserDetails",
+            type: "GET",
+            //dataType: "application/json",
+            success: function (data) {
+                if (data != null) {
+                    if (data["Avatar"] != null)
+                        if (data["Avatar"] != "")
+                            $(".sideAvatar").attr("src", data["Avatar"]);
+
+                    $(".name").text(data["FirstName"]);
+                    $(".surname").text(data["Surname"]);
+                }
+            },
+            error: function () {
+            }
+        });
+    });
+</script>

@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+<style>
+    .aboutSection { background-color: rgba(0,0,0,0.7)!important; text-align: center;color:#eee; padding: 0 4px;font-size: 14px;}
+    .collageContainer { position:fixed; width:100%; height: 100%;z-index:-1;top:0;left:0}
+    .inceptionFont{color:#fff}
+    section { margin: 0 auto; max-width: 560px; }
+    #jobContainer {width:100%; max-width: 767px; margin: 0 auto;}
+    #searchedFeeds { max-width:767px;padding:8px; margin:0 auto;margin-top:20px}
+    #searchedFeeds .navOption {background-color: #cecece;color: #5d5d5d;font-weight: bold;border: none;margin-top: 16px!important;}
+    .helloWorld {color:#fff;text-align:center}
+    .helloWorld h2 {font-size:40px;margin:0}
+    .helloWorld p {font-size:16px;font-size: 16px;background-color: rgba(0,0,0,0.2);padding: 5px;}
+    .aboutSection input {margin: 0;background-color: transparent;border-color: transparent;color: #00dbfd;font-size: 17px;border-bottom: 1px solid #00dbfd;padding: 10px 0;text-align: center;}
+    .searchSection {display:block;width:100%;text-align:center}
+    .inputCell {display:inline-block; width:100%;max-width:375px;margin:4px auto}
+    .postText p {color: #1f1f1f;text-align:left}
+    .loader {
+        text-align:center;
+        background-image:url(../../Content/Images/Icons/loader.gif);
+        background-size:40px;
+        background-position:center;
+        background-repeat:no-repeat;
+        width:100%;
+        height:50px;
+        opacity:0.7;
+        background-color: transparent;
+        display:none;
+    }
+</style>
+@Html.Partial("~/Views/Shared/_TitleBar.cshtml")
+
+<section>
+    <div class="helloWorld">
+        <h2 class="inceptionFont">Welcome to Inception</h2>
+        <p class="">Inviting students to enjoy a central point for all your career aspirations from inception to graduation.</p>
+    </div>
+</section>
+
+<a href="@Url.Action("Index", "Account")">
+    <div class="postContainer defaultBackground navOption" style="margin:0 auto; max-width:200px;text-align:center;margin-bottom:20px;border:1px solid #00dbfd">
+        <div class="navOptionDescription" style="display:block;border:none;">
+            Login/Register
+        </div>
+    </div>
+</a>
+
+<input type="hidden" id="pageSize" value="5">
+<div id="jobContainer" class="aboutSection">
+    <div class="searchSection">
+        <div class="inputCell">
+            Search for
+            <input id="searchProfession" type="text" value="Graduate Internship">
+        </div>
+        <div class="inputCell">
+            in which city? (default Johannesburg)
+            <input id="searchLocation" type="text" value="Johannesburg">
+        </div>
+        <div class="inputCell">
+            <button id="btnSearch">Search</button>
+        </div>
+    </div>
+
+    <div class="loader"></div>
+    <div id="searchedFeeds"></div>
+</div>
+
+<div class="collageContainer"></div>
+<script>
+    $(window).ready(function () {
+        if (document.body.clientWidth > 640) {
+            $.get("/Account/GenerateCollage", function (html) {
+                $(".collageContainer").html(html);
+            });
+        } else {
+            $.get("/Account/GenerateMobileCollage", function (html) {
+                $(".collageContainer").html(html);
+                $(".divCollageItem").css({ "opacity": "0.1" });
+            });
+        }
+
+        $("#btnSearch").click(function () { loadFeeds(); });
+        window.setTimeout(function () { loadFeeds(); }, 2000);
+    });
+
+    var loaded = false;
+
+    function loadFeeds() {
+
+        $(".loader").show();
+        $("btnSearch").attr("disabled", "disabled");
+
+        var profession = $("#searchProfession").val();
+        var location = $("#searchLocation").val();
+        location = location == "Johannesburg" ? "" : location;
+
+        $.ajax({
+            url: "/Feeds/GetFeeds_CareerJet",
+            type: "GET",
+            data: { keywords: profession, location: location, pageSize: $("#pageSize").val() },
+            dataType: "HTML",
+            success: function (html) {
+                $("#searchedFeeds").html(html);
+                loaded = true;
+            },
+            error: function () {
+                console.log("error on profession")
+            }
+        }).always(function () {
+            $(".loader").hide();
+            $("btnSearch").removeAttr("disabled");
+        });
+    }
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77754255-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

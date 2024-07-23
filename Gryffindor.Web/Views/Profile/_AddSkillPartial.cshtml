@@ -1,0 +1,40 @@
+﻿@model Gryffindor.Web.Models.QualificationViewModel
+
+<div class="editProfileContainer">
+    <input type="hidden" value="@Convert.ToInt32(Gryffindor.Contract.Enums.QualificationType.Skills)" name="type">
+    @Html.HiddenFor(m => m.UserProfileSkill.UserProfileSkillId)
+    @Html.AntiForgeryToken()
+    <ol>
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileSkill.SkillName)</p>
+            @Html.TextBoxFor(m => m.UserProfileSkill.SkillName, new { @placeholder = "Skill Name", @required = "required" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileSkill.SkillName)
+        </li>
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileSkill.Rating)</p>
+            @Html.TextBoxFor(m => m.UserProfileSkill.Rating, new { @type="range", @min="0", max="10", @placeholder = "Rating out of 10", @required = "required" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileSkill.Rating)
+        </li>
+    </ol>
+    <ul class="datePlaceholder">
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileSkill.DateGained)</p>
+            @Html.TextBoxFor(m => m.UserProfileSkill.DateGained, new { @placeholder = "Date Gained", @class = "datepicker", @readonly = "readonly", @required = "required" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileSkill.DateGained)
+        </li>
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileSkill.LastPracticed)</p>
+            @Html.TextBoxFor(m => m.UserProfileSkill.LastPracticed, new { @placeholder = "Last Practiced", @class = "datepicker", @readonly = "readonly" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileSkill.LastPracticed)
+        </li>
+    </ul>
+</div>
+<div class="editProfileContainer">
+    <button type="submit" class="greenBackground btn">
+        Save Skill
+    </button>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

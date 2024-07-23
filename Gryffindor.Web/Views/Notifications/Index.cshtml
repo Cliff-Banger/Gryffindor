@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Gryffindor.Contract.Dto.Notification>
+@{
+    ViewBag.Title = "Notifications";
+}
+
+<style>
+    .notificationItem {
+    background-color: transparent;
+    color: rgb(51, 63, 80);
+    font-size: 14px;
+    padding: 17px 5px;
+    margin: 3px 0;
+    border-bottom: 1px solid rgba(51,63,80,0.2);
+}
+.notificationItem a {
+    color: rgb(51, 63, 80)!important;
+    font-weight:bold;
+}
+.dateTime {
+    float:right;
+}
+</style>
+
+<div class="divHeading">Notifications</div>
+<hr>
+
+<div class="message">@ViewBag.Message</div>
+
+@foreach (var item in Model)
+{
+
+    var notificationLink = string.IsNullOrEmpty(item.NotificationLink) ? "#" : item.NotificationLink;
+    var date = string.Format("{0:r}", item.SentOn);
+
+    <div class="notificationItem">
+        <a href="@Url.Action("View", "Profile", new { id = item.SenderUsername  })">@item.SenderName</a> <a style="font-weight:normal;" href="@notificationLink">@item.Text</a>
+        <span class="dateTime">@date.Remove(date.Length -7)</span>
+    </div>
+}

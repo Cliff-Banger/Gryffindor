@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Gryffindor.Contract.Dto.UserProfile>
+
+    @foreach (var item in Model)
+    {
+        var avatar = string.IsNullOrEmpty(item.Avatar) ? "../../Content/Images/SamplePhotos/default.png" : item.Avatar;
+        <div class="postContainer">
+            <div class="postDetails">
+                <div class="avatarContainer">
+                    <a href="@Url.Action("View","Profile", new { id = item.Username })"><img alt="avatar" class="avatar" src="@avatar"></a>
+                </div>
+                <div class="detailsContainer">
+                    <a href="@Url.Action("View","Profile", new { id = item.Username })"><div>@item.FullName</div></a>
+                </div>
+            </div>
+
+            
+        </div>
+    }
+    <script>
+
+        siteEvents.bindFeedEvents();
+
+    </script>

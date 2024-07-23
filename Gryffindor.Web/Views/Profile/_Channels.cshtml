@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Gryffindor.Contract.Dto.Channel>
+
+@foreach(var item in Model)
+{
+    var classSelected = item.IsSelected ? "selectedOption" : "";
+    var following = item.IsSelected ? "Following" : "Follow";
+    @*<div class="channelBox" style="background-image:url(@item.ImagePath)">*@
+    <div class="channelBox" style="background-image:url(@item.ImagePath)">
+        <div class="channelName">@item.Name</div>
+        <div class="channelOption @classSelected" id="@item.ChannelId">@following</div>
+    </div>
+}
+<script>
+    $(window).ready(function () { siteEvents.bindFollowChannelEvents(); });
+</script>

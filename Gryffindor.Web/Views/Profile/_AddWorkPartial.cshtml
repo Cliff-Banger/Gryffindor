@@ -1,0 +1,45 @@
+﻿@model Gryffindor.Web.Models.QualificationViewModel
+
+<div class="editProfileContainer">
+    <input type="hidden" value="@Convert.ToInt32(Gryffindor.Contract.Enums.QualificationType.Work)" name="type">
+    @Html.HiddenFor(m => m.UserProfileWork.UserProfileWorkId)
+    @Html.AntiForgeryToken()
+    <ol>
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileWork.CompanyName)</p>
+            @Html.TextBoxFor(m => m.UserProfileWork.CompanyName, new { @placeholder = "Company", @required = "required" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileWork.CompanyName)
+        </li>
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileWork.Position)</p>
+            @Html.TextBoxFor(m => m.UserProfileWork.Position, new { @placeholder = "Position", @required = "required" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileWork.Position)
+        </li>
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileWork.ResponsibilitiesSummary)</p>
+            @Html.TextBoxFor(m => m.UserProfileWork.ResponsibilitiesSummary, new { @placeholder = "Responsibilities Summary", @required = "required" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileWork.ResponsibilitiesSummary)
+        </li>
+    </ol>
+    <ul class="datePlaceholder">
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileWork.DateFrom)</p>
+            @Html.TextBoxFor(m => m.UserProfileWork.DateFrom, new { @placeholder = "Start Date", @class = "datepicker", @readonly = "readonly", @required = "required" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileWork.DateFrom)
+        </li>
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileWork.DateTo)</p>
+            @Html.TextBoxFor(m => m.UserProfileWork.DateTo, new { @placeholder = "Last Day", @class = "datepicker", @readonly = "readonly" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileWork.DateTo)
+        </li>
+    </ul>
+</div>
+<div class="editProfileContainer">
+    <button type="submit" class="greenBackground btn">
+        Save Work Experience
+    </button>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,126 @@
+﻿@model Gryffindor.Contract.DataModels.ResumeDataModel
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<style>
+    .wizardNav, .wizardSubNav button {
+        width:100%;
+        margin-top:10px;
+    }
+
+    .wizardNav button, .wizardSubNav  button {
+        width: 49%;
+        padding: 10px 0;
+    }
+
+    .wizardNav .btnBack {
+        border: 1px solid rgb(0, 112, 191);
+    }
+
+    .wizardStepsContainer {
+        display:none;
+    }
+
+    .current_step {
+        display:block;
+    }
+    #btnBack,
+    #btnFinish {
+        display:none;
+    }
+</style>
+
+<div class="divHeading">CV Builder</div>
+<hr>
+
+<input id="mainWizardCurrentStep" type="hidden" value="1">
+<div id="step_1" class="wizardStepsContainer current_step" stepNumber="1">
+    @Html.Partial("~/Views/Resume/_ResumeDesignPickerPartial.cshtml")
+</div>
+
+<div id="step_2" class="wizardStepsContainer" stepNumber="2">
+    @Html.Partial("~/Views/Resume/_ResumeQualificationsPartial.cshtml")
+</div>
+
+<div id="step_3" class="wizardStepsContainer" stepNumber="3">
+    @Html.Partial("~/Views/Resume/_ResumePersonalInfoPartial.cshtml", Model.UserProfile)
+</div>
+
+<div class="wizardNav">
+    <button id="btnPreviousPage" class="btn defaultBackground btnBack" onclick="location.href='@Url.Action("Index", "Resume", new { Message = "" })'">
+        Back
+    </button>
+
+    <button id="btnBack" class="btn defaultBackground btnBack">
+        Back
+    </button>
+
+    <button id="btnNext" class="btn blueBackground">
+        Next
+    </button>
+
+    <button id="btnFinish" class="btn greenBackground" onclick="location.href='@Url.Action("Index", "Resume", new { Message = "" })'">
+        Finish
+    </button>
+
+</div>
+
+<script>
+    var wizardPages = 3;
+    var pageStart = 1;
+    $(window).ready(function () {
+        $("#btnBack").click(function () {
+            var currentStep = $(".current_step").attr("stepNumber");
+            
+            if (currentStep != pageStart)
+            {
+                currentStep = parseInt(currentStep) - 1;
+                $(".wizardStepsContainer").removeClass("current_step");
+                $("#step_" + currentStep).addClass("current_step");
+                $("#mainWizardCurrentStep").val(currentStep).change();
+            }
+
+            if (currentStep != wizardPages) {
+                $("#btnNext").show();
+                $("#btnFinish").hide();
+            }
+
+            if (currentStep == pageStart) {
+                $("#btnBack").hide();
+                $("#btnPreviousPage").show();
+            }
+        });
+
+        $("#btnNext").click(function () {
+            var currentStep = $(".current_step").attr("stepNumber");
+            if (currentStep < wizardPages) {
+                currentStep = parseInt(currentStep) + 1;
+                $(".wizardStepsContainer").removeClass("current_step");
+                $("#step_" + currentStep).addClass("current_step");
+                $("#mainWizardCurrentStep").val(currentStep).change();
+            }
+
+            if (currentStep == wizardPages) {
+                $("#btnNext").hide();
+                $("#btnFinish").show();
+            }
+
+            if (currentStep != pageStart) {
+                $("#btnBack").show();
+                $("#btnPreviousPage").hide();
+            }
+        });
+
+        $("input[type=hidden]").unbind("change");
+        $("input[type=hidden]").bind("change", function () {
+            var currentStep = $(".current_step").attr("stepNumber");
+            if (currentStep = 2) {
+                $(".wizardNav").hide();
+                $(".wizardSubNav").show();
+            } else {
+                $(".wizardNav").show();
+                $(".wizardSubNav").hide();
+            }
+        });
+    });
+</script>
+

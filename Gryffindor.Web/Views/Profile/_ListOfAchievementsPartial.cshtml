@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Gryffindor.Contract.Dto.UserProfileAchievement>
+
+<div class="divSubHeading">My Achievements</div>
+<hr>
+@if (!Model.Any())
+{
+    <p>Nothing added yet...</p>
+}
+@{
+    var qualType = (int)Gryffindor.Contract.Enums.QualificationType.Work;
+    foreach (var item in Model)
+    {
+        <div class="qualificationListItem">
+            <div class="qualificationIcon achievementIcon greenBackground"></div>
+            <div class="qualificationInfo" id="@item.UserProfileAchievementId" qualType="@qualType">
+                <p><b>@item.AchievementName</b></p>
+                <p>@item.AchievedOn.Value.Date.ToString("d")</p>
+            </div>
+        </div>
+    }
+}

@@ -1,0 +1,44 @@
+﻿@model Gryffindor.Contract.Dto.Organisation
+@{
+    ViewBag.Title = "View";
+}
+<style>.content{text-align:center}</style>
+<div class="divHeading">@Model.Name</div>
+<hr>
+
+@{
+    var avatar = string.IsNullOrEmpty(Model.LogoPath) ? "/Content/Images/SamplePhotos/defaultPicture.png" : Model.LogoPath;
+    var banner = string.IsNullOrEmpty(Model.MainPicturePath) ? "/Content/Images/SamplePhotos/defaultPicture.png" : Model.MainPicturePath;
+    var organisationType = (Gryffindor.Contract.Enums.OrganisationType)Model.OrganisationType;
+}
+<div class="message">@ViewBag.Message</div>
+<div class="profileAvatarContainer" style="background-image:url(@banner);height: 170px;">
+    <img src="@avatar" width="100" style="position:initial; margin-top:20px">
+    <p style="background-color:rgba(0,0,0,0.3);padding:4px;color:#dedede">@organisationType</p>
+</div>
+<br>
+<div class="quickInfo">
+    @if (!string.IsNullOrEmpty(Model.ApplicationUrl))
+    {
+        <a href="@Model.ApplicationUrl">
+            <div class="greenBackground" style="padding:8px;max-width:100px;margin: 0 auto;">Apply</div>
+        </a>
+    }
+</div>
+<br>
+<div class="divSubHeading">About</div>
+<hr>
+
+<p>@Model.Description</p>
+
+<div class="divSubHeading">Address</div>
+<hr>
+<p>@Model.Address</p>
+
+<div class="divSubHeading">Contact</div>
+<hr>
+<p>@Model.Telephone</p>
+
+<p>@Model.Email</p>
+
+<a href="@Model.Website"><p>@Model.Website</p></a>

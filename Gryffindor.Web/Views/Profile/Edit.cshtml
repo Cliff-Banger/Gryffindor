@@ -1,0 +1,148 @@
+﻿@model Gryffindor.Web.Models.UserProfileViewModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="divHeading">Profile</div>
+<a href="@Url.Action("Qualifications", "Profile")" class="btn defaultBackground" style="padding:8px; opacity:0.7">Education / Work</a>
+<hr>
+
+<div class="message">@ViewBag.Message</div>
+
+@using (Html.BeginForm("Edit","Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="editProfileContainer">
+        <img id="postedPicture" src="@Model.Profile.Avatar" style="width:60px;display:inline-block" />
+        <div style="text-align:left;padding:8px 12px;display:none" class="blueBackground" id="postedPictureContainer">x</div>
+        <div class="divUpload defaultBackground">
+            <a href="#">
+                <img src="~/Content/Images/Icons/camera-white.png" alt="Attach" /><span  style="color:#fff">Change</span>
+                @Html.TextBoxFor(m => m.ImageFile, new { @id = "imgUpload", @type = "file", @class = "upload", @accept = "image/*" })
+            
+            </a>
+        </div>
+        @Html.ValidationMessageFor(m => m.ImageFile)
+    </div>
+    <div class="divSubHeading">Personal details</div>
+    <hr>
+    <div class="editProfileContainer">
+        <ol>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Profile.FirstName)</p>
+                @Html.TextBoxFor(m => m.Profile.FirstName)
+                <br>@Html.ValidationMessageFor(m => m.Profile.FirstName)
+            </li>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Profile.Surname)</p>
+                @Html.TextBoxFor(m => m.Profile.Surname)
+                <br>@Html.ValidationMessageFor(m => m.Profile.Surname)
+            </li>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Gender)</p>
+                @Html.EnumDropDownListFor(m => m.Gender)
+                <br>@Html.ValidationMessageFor(m => m.Gender)
+            </li>
+        </ol>
+    </div>
+    <div class="divSubHeading">Preferences</div>
+    <hr>
+    <div class="editProfileContainer">
+        <ol>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Profile.PreferredProfession)</p>
+                @Html.TextBoxFor(m => m.Profile.PreferredProfession)
+                <br>@Html.ValidationMessageFor(m => m.Profile.PreferredProfession)
+            </li>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Profile.PreferredWorkArea)</p>
+                @Html.TextBoxFor(m => m.Profile.PreferredWorkArea)
+                <br>@Html.ValidationMessageFor(m => m.Profile.PreferredWorkArea)
+            </li>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.MainInterest)</p>
+                @Html.EnumDropDownListFor(m => m.MainInterest)
+                <br>@Html.ValidationMessageFor(m => m.MainInterest)
+            </li>
+        </ol>
+    </div>
+    <div class="divSubHeading">Contact details</div>
+    <hr>
+    <div class="editProfileContainer">
+        <ol>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Profile.PreferredEmail)</p>
+                @Html.TextBoxFor(m => m.Profile.PreferredEmail, new { @placeholder = "Email" })
+                <br>@Html.ValidationMessageFor(m => m.Profile.PreferredEmail)
+            </li>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Profile.PhoneNumber)</p>
+                @Html.TextBoxFor(m => m.Profile.PhoneNumber, new { @placeholder = "Phone number" })
+                <br>@Html.ValidationMessageFor(m => m.Profile.PhoneNumber)
+            </li>
+        </ol>
+    </div>
+    <div class="divSubHeading">About me</div>
+    <hr>
+    <div class="editProfileContainer">
+        <ol>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Profile.HomeTown)</p>
+                @Html.TextBoxFor(m => m.Profile.HomeTown, new { @placeholder = "Hometown" })
+                <br>@Html.ValidationMessageFor(m => m.Profile.HomeTown)
+            </li>
+        </ol>
+        <ol>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Profile.Bio)</p>
+                @Html.TextAreaFor(m => m.Profile.Bio, new { @placeholder = "Bio" })
+                @*<br>@Html.ValidationMessageFor(m => m.Profile.Bio)*@
+            </li>
+        </ol>
+        <ol>
+            <li>
+                <div class="checkboxContainer" style="display:none">
+                    @Html.CheckBoxFor(m => m.Profile.IsPrivate)
+                    <label for="chkJobPost">Make my profile private</label>
+                </div>
+            </li>
+        </ol>
+    </div>
+    <hr />
+    <div class="editProfileContainer">
+        <button type="submit" class="greenBackground btn">
+            Save changes
+        </button>
+    </div>
+}
+    <script>
+        $(window).ready(function () {
+            $("#imgUpload").change(function () {
+                readURL(this);
+            });
+            $("#postedPictureContainer").click(function () {
+                var input = $("#imgUpload");
+                input.replaceWith(input.val('').clone(true));
+            });
+        });
+
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $("#postedPicture").attr("src", e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+                //$("#postedPictureContainer").css({"display":"inline-block"});
+            }
+            else {
+                $("#postedPictureContainer").hide();
+            }
+        }
+    </script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

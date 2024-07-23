@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+<style>
+    .info { padding:2px 8px; }
+    .aboutSection { background-color: rgba(0,0,0,0.7)!important; text-align: center;color:#eee; padding: 0 4px;font-size: 14px;}
+    .collageContainer { position:fixed; width:100%; height: 100%;z-index:-1;top:0;left:0}
+    .inceptionFont{color:#fff}
+    .divSubHeading{ color: rgb(29, 36, 46);background-color: #eee;}
+    .brandArea {font-size:23px;color:#fff;float:left;border-bottom:1px solid rgba(255,255,255,0.5);width:100%}
+</style>
+
+@Html.Partial("~/Views/Shared/_TitleBar.cshtml")
+
+<div style="text-align:center"><h1 class="inceptionFont">Contact Inception</h1></div>
+
+<div class="aboutSection">
+    <div style="text-align:center">
+    <hr>
+        Feel free to contact us. We are available to assist you with your queries
+    </div>
+
+    <div class="divSubHeading">Social pages</div>
+    <hr>
+    <div>
+        <p>www.facebook.com/inceptionV4/</p>
+    </div>
+
+    <div class="divSubHeading">More info</div>
+    <hr>
+    <div class="info">
+        <p>Cliff Bila: cliffb@incept.co.za</p>
+        <p>Kopano Theledi: kopanot@incept.co.za - 082 340 5097</p>
+    </div>
+
+    <div class="divSubHeading">Marketing and Advertising</div>
+    <hr>
+    <div class="info">
+        <p>Cliff Bila: cliffb@incept.co.za</p>
+        <p>Thato Theledi: thatot@incept.co.za</p>
+    </div>
+
+    <div class="divSubHeading">Support</div>
+    <hr>
+    <div class="info">
+        <p>Kopano Theledi: kopanot@incept.co.za - 082 340 5097</p>
+        <p>Cliff Bila: cliffb@incept.co.za</p>       
+    </div>
+</div>
+
+
+<a href="@Url.Action("Index", "Home")">
+    <div class="postContainer defaultBackground navOption">
+        <div class="icon homeIcon">
+        </div>
+        <div class="navOptionDescription">
+            Back to Home
+        </div>
+    </div>
+</a>
+<div class="collageContainer"></div>
+<script>
+    $(window).ready(function () {
+        if (document.body.clientWidth > 640) {
+            $.get("/Account/GenerateCollage", function (html) {
+                $(".collageContainer").html(html);
+            });
+        } else {
+            $.get("/Account/GenerateMobileCollage", function (html) {
+                $(".collageContainer").html(html);
+                $(".divCollageItem").css({ "opacity": "0.1" });
+            });
+        }
+    });
+</script>

@@ -1,0 +1,36 @@
+﻿@model Gryffindor.Contract.DataModels.ResumeDataModel
+
+<style>
+    .navOption { margin:0 }
+    .greenBorder {border:1px solid #007d08}
+</style>
+<br>
+<a href="@Url.Action("Wizard", "Resume")">
+    <div class="postContainer defaultBackground navOption">
+        <div class="icon hammerIcon">
+        </div>
+        <div class="navOptionDescription">
+            Build My CV
+        </div>
+    </div>
+</a>
+<br>
+<a href="@Url.Action("DownloadUserResume", "Resume", new { username = Model.UserProfile.Username })">
+    <div class="postContainer defaultBackground navOption greenBorder">
+        <div class="icon downloadIcon">
+        </div>
+        <div class="navOptionDescription">
+            Download my current CV
+        </div>
+    </div>
+</a>
+<br>
+<div class="divHeading">My CV Checklist</div>
+<hr>
+@Html.Partial("~/Views/Resume/_ResumeStatusPartial.cshtml", Model)
+<br>
+@*
+    <div class="divHeading">Who can view my CV</div>
+    <hr>
+    @Html.Partial("~/Views/Resume/_ResumeSharePartial.cshtml")
+*@

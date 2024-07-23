@@ -1,0 +1,27 @@
+﻿@model Gryffindor.Web.Models.LoginViewModel
+
+@using (Html.BeginForm("Login","Account", new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+
+        <ol>
+            <li class="input_li" style="width:100%">
+                <p class="label">@Html.LabelFor(m => m.Email)</p>
+                @Html.TextBoxFor(m => m.Email)
+                <br>@Html.ValidationMessageFor(m => m.Email)
+            </li>
+            <li class="input_li" style="width:100%">
+                <br>
+                <p class="label">@Html.LabelFor(m => m.Password)</p>
+                @Html.PasswordFor(m => m.Password)
+                <br>@Html.ValidationMessageFor(m => m.Password)
+            </li>
+            <li class="btnLogin_li">
+                <input type="submit" value="Log in" class="btnLogin" />
+            </li>
+        </ol>
+
+        <a href="@Url.Action("ForgotPassword", "Account")" style="color: #fff;text-decoration: underline;">Forgot Password?</a>
+}

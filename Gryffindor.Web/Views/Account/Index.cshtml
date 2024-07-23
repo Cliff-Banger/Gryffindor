@@ -1,0 +1,143 @@
+﻿@model Gryffindor.Web.Models.LoginViewModel
+@{
+    ViewBag.Title = "Welcome to Inception";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+<style>
+    form p {margin:0;}
+    .loginSection {
+        width:100%;
+        background-color: transparent;
+        /*border-bottom: 1px solid #fff;*/
+        color: #fff;
+    }
+
+    .loginSection form { float:right;max-width: 767px;background-color:rgba(0,0,0,0.6);padding: 10px 31px;}
+    section { margin: 0 auto; max-width: 560px; }
+    input { padding:5px; margin-bottom: 15px; }
+    /*.input_li { min-width:307px;vertical-align:top; }*/
+    .input_li input { width:96%; }
+    .btnLogin_li { vertical-align: top;margin-top: 15px; width:77px; }
+    select, input {padding: 8px 2%;width: 94%;margin: 0;}
+    section.registerSection label {color:rgb(51, 63, 80)!important;}
+    .registerSection {width:100%;position:relative;color:rgb(51, 63, 80)}
+    .registerSection form {max-width: 485px; margin-bottom:50px; background-color:rgba(0,0,0,0.7); float:right}
+    .registerSection form fieldset {margin: 10px; background-color:#ececec;background-color:rgba(236, 236, 236, 0.71);text-align: center; border:none;}
+    .registerSection .label {margin-top:15px;color:rgb(51, 63, 80)!important;}
+    .registerSection li, .registerSection input, .registerSection select{width: 100%;}
+    .registerSection ol {padding:0; text-align:left}
+    .registerSection input[type=submit] {height: 40px;width: 87%;margin-left: 7px;}
+    .registerSection input[type=text], .registerSection input[type=password] {padding:8px 1%;width:98%;}
+    legend { background-color: rgb(51, 63, 80);padding: 12px 33px;color: #fff;text-align:left}
+    .label, .field-validation-error {font-size:13px}
+    input[type=submit] {width: 100%;}
+    body {padding: 0 8px;}
+    footer{ position: fixed;bottom:0;left: 0;background-color: #000;min-height: 50px;width: 100%;}
+    .collageContainer {position:fixed; width:100%; height: 100%;z-index:-1;top:0;left:0}
+    .brandArea {font-size:23px;color:#fff;float:left;border-bottom:1px solid rgba(255,255,255,0.5);width:100%}
+    #body {margin-top: 0}
+    .forgotPassword{color:#fff;font-size:14px;float:right}
+
+    .loginRegContainer {width:auto;display:table;float:right;}
+    .loginRegContainer div {padding:8px;display:table-cell;background-color: rgba(255,255,255,0.6);cursor:pointer}
+    .selectedTab {background-color: rgb(51, 63, 80)!important; color: #fff}
+   /* form {position: absolute;
+    right: 0;}*/
+
+   .aboutGradImage { margin: 0 auto; max-width: 676px; }
+   .aboutSection { background-color: rgba(0,0,0,0.7)!important; text-align: center;color:#eee;}
+   .divHeading { background-color: #eee!important;color: rgb(51, 63, 80)!important; }
+   .info { color:#eee!important; }
+   .navSection {float:right;background-color:rgba(0,0,0,0.4);padding: 6px;}
+   .navSection, .navSection a, .navSection a:visited {color:#fff; font-size:12px;font-weight:bold;}
+   .link{display:inline-block;margin:0 5px;}
+   .helloWorld {color:#fff;text-align:center}
+   .helloWorld h2 {font-size:40px;margin:0}
+   .helloWorld p {font-size:16px;font-size: 16px;background-color: rgba(0,0,0,0.2);padding: 5px;}
+</style>
+
+<div class="message" style="text-align:right;margin:0">@ViewBag.Message</div>
+
+@Html.Partial("~/Views/Shared/_TitleBar.cshtml")
+
+<section>
+<div class="helloWorld">
+    <h2 class="inceptionFont">Welcome to Inception</h2>
+    <p class="">Inviting students to enjoy a central point for all your career aspirations from inception to graduation.</p>
+</div>
+</section>
+
+<div style="margin:0 auto; width:100%;max-width:560px">
+    <div class="loginRegContainer">
+        <div class="toggleLogin selectedTab">Login</div>
+        <div class="toggleReg">Register</div>
+    </div>
+</div>
+
+<section class="loginSection">
+    @Html.Action("Login", "Account")
+</section>
+
+<section class="registerSection" style="display:none">    
+    @Html.Action("Register", "Account")
+</section>
+
+<div class="collageContainer"></div>
+
+<script>
+    $(window).ready(function () {
+
+       /* $.get("Home/AboutPartial", function (html) {
+            $("#aboutSection").html(html);
+        });*/
+
+        $(".toggleLogin").click(function () {
+            if ($(this).hasClass("selectedTab"))
+                return;
+
+            $(".registerSection").stop().fadeOut(function () {
+                $(".loginSection").stop().fadeIn();
+                $(".aboutSection").css({ "top": "80%" })
+            }); 
+            $(".toggleReg").toggleClass("selectedTab");
+            $(".toggleLogin").toggleClass("selectedTab");
+        });
+
+        $(".toggleReg").click(function () {
+            if ($(this).hasClass("selectedTab"))
+                return;
+
+            $(".loginSection").stop().fadeOut(function () {
+                $(".registerSection").stop().fadeIn();
+                $(".aboutSection").css({ "top": "120%" })
+            });
+            $(".toggleReg").toggleClass("selectedTab");
+            $(".toggleLogin").toggleClass("selectedTab");
+        });
+
+        if (document.body.clientWidth > 640) {
+            $.get("/Account/GenerateCollage", function (html) {
+                $(".collageContainer").html(html);
+            });
+        } else {
+            $.get("/Account/GenerateMobileCollage", function (html) {
+                $(".collageContainer").html(html);
+                $(".divCollageItem").css({ "opacity": "0.1" });
+            });
+        }
+    });
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-77754255-1', 'auto');
+  ga('send', 'pageview');
+
+</script>

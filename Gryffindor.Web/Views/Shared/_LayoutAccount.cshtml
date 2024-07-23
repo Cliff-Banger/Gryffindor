@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Inception</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/Content/js")
+        @RenderSection("scripts", required: false)
+        <style>
+            .content {
+                margin: 15px auto;
+                background-color: transparent;
+                width: 100%;
+                height: 100%;
+                position: relative;
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+
+       <div id="body">
+
+           <div class="content">
+              @RenderBody()
+           </div>
+
+       </div>
+    </body>
+</html>

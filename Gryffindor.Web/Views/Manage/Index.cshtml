@@ -1,0 +1,16 @@
+﻿@model Gryffindor.Web.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<div class="divHeading">Change your account settings</div>
+<hr>
+
+<div class="message">@ViewBag.Message</div>
+
+
+<a href="@Url.Action("ChangePassword","Manage")">
+    <div class="listItem">
+        Change Password
+    </div>
+</a>

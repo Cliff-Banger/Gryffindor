@@ -1,0 +1,59 @@
+﻿@model Gryffindor.Web.Models.SearchViewModel
+@{
+    ViewBag.Title = "Search";
+}
+
+<div class="divHeading">Search Results</div>
+<hr>
+
+<div class="searchLinkContainer">
+    <a href="#">
+        <p class="searchLink selected" >Posts</p>
+    </a>
+    <a href="#">
+        <p class="searchLink">People</p>
+    </a>
+    <a href="#">
+        <p class="searchLink">Jobs</p>
+    </a>
+</div>
+@Html.Partial("~/Views/Feeds/_ProfileFeed.cshtml", Model.Users)
+@Html.Partial("~/Views/Feeds/_PostedFeed.cshtml", Model.Feeds)
+
+<div id="searchResults">
+
+</div>
+
+<script>
+    $(window).ready(function () {
+        $("#btnSearch").click(function () { loadFeeds(); });
+
+    });
+
+    function loadFeeds() {
+
+        $(".loader").show();
+        $("btnSearch").attr("disabled", "disabled");
+
+        var profession = $("#searchProfession").val();
+        var location = $("#searchLocation").val();
+        location = location == "Johannesburg" ? "" : location;
+
+        $.ajax({
+            url: "/Feeds/GetFeeds_CareerJet",
+            type: "GET",
+            data: { keywords: profession, location: location, pageSize: $("#pageSize").val() },
+            dataType: "HTML",
+            success: function (html) {
+                $("#searchedFeeds").html(html);
+                loaded = true;
+            },
+            error: function () {
+                console.log("error on profession")
+            }
+        }).always(function () {
+            $(".loader").hide();
+            $("btnSearch").removeAttr("disabled");
+        });
+    }
+</script>

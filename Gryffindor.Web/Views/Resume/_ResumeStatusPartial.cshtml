@@ -1,0 +1,115 @@
+﻿@model Gryffindor.Contract.DataModels.ResumeDataModel
+
+<style>
+    .resumeStatusItem {
+        position:relative;
+        color:#fff;
+        margin:0 1px;
+        padding: 8px;
+        border-bottom:1px solid #dcdcdc;
+        opacity:1;
+    }
+    .resumeStatusItem:hover {opacity:0.95;}
+    .resumeStatusItem:active {opacity:0.98;}
+
+    .resumeStatusItem .icon {
+        background-repeat: no-repeat;
+        background-size: contain;
+        display: table-cell;
+        width: 30px;
+        height: 30px;
+    }
+    .resumeStatusInfo {
+        display:table-cell;
+        vertical-align:top;
+    }
+    .resumeDescription {
+        padding: 0 7px;
+        margin: 0;
+    }
+
+    .resumeStatus {
+        padding: 14px 7px 0 7px;
+        margin: 0;
+        font-size:12px;
+    }
+
+    .itemsCount { 
+        position:absolute;
+        right:10px;
+        top: 16px;
+        padding: 9px;
+        font-size:12px; 
+        border-radius:50px;
+        font-weight:bold;
+    }
+</style>
+@{ 
+    var educationClass = Model.Education.Count > 0 ? "greenBackground" : "redBackground";
+    var educationText = Model.Education.Count > 0 ? "Complete" : "<b>INCOMPLETE</b>";
+
+    var skillsClass = Model.Skills.Count > 0 ? "greenBackground" : "redBackground";
+    var skillsText = Model.Skills.Count > 0 ? "Complete" : "<b>INCOMPLETE</b>";
+
+    var achievementsClass = Model.Achievements.Count > 0 ? "greenBackground" : "redBackground";
+    var achievementsText = Model.Achievements.Count > 0 ? "Complete" : "<b>INCOMPLETE</b>";
+
+    var workClass = Model.Work.Count > 0 ? "greenBackground" : "redBackground";
+    var workText = Model.Work.Count > 0 ? "Complete" : "<b>INCOMPLETE</b>";
+
+    <a href="@Url.Action("Qualifications", "Profile", new { option = 0 })">
+        <div class="resumeStatusItem defaultBackground">
+            <div class="icon gradIcon">
+            </div>
+            <div class="resumeStatusInfo">
+                <p class="resumeDescription">@Gryffindor.Contract.Enums.QualificationType.Education</p>
+                <p class="resumeStatus true">@Html.Raw(educationText) (Needed to apply for jobs)</p>
+                <span id="" class="@educationClass itemsCount">
+                    @Model.Education.Count
+                </span>
+            </div>
+        </div>
+    </a>
+
+    <a href="@Url.Action("Qualifications", "Profile", new { option = 1 })">
+        <div class="resumeStatusItem defaultBackground">
+            <div class="icon skillIcon">
+            </div>
+            <div class="resumeStatusInfo">
+                <p class="resumeDescription">@Gryffindor.Contract.Enums.QualificationType.Skills</p>
+                <p class="resumeStatus true">@Html.Raw(skillsText) (Needed to apply for jobs)</p>
+                <span id="" class="@skillsClass itemsCount">
+                    @Model.Skills.Count
+                </span>
+            </div>
+        </div>
+    </a>
+
+    <a href="@Url.Action("Qualifications", "Profile", new { option = 2 })">
+        <div class="resumeStatusItem defaultBackground">
+            <div class="icon achievementIcon">
+            </div>
+            <div class="resumeStatusInfo">
+                <p class="resumeDescription">@Gryffindor.Contract.Enums.QualificationType.Achievements</p>
+                <p class="resumeStatus true">@Html.Raw(achievementsText)</p>
+                <span id="" class="@achievementsClass itemsCount">
+                    @Model.Achievements.Count
+                </span>
+            </div>
+        </div>
+    </a>
+
+    <a href="@Url.Action("Qualifications", "Profile", new { option = 3 })">
+        <div class="resumeStatusItem defaultBackground">
+            <div class="icon workIcon">
+            </div>
+            <div class="resumeStatusInfo">
+                <p class="resumeDescription">@Gryffindor.Contract.Enums.QualificationType.Work</p>
+                <p class="resumeStatus true">@Html.Raw(workText)</p>
+                <span id="" class="@workClass itemsCount">
+                    @Model.Work.Count
+                </span>
+            </div>
+        </div>
+    </a>
+}

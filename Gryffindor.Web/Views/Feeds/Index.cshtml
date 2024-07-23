@@ -1,0 +1,42 @@
+﻿@model Gryffindor.Contract.Dto.Feed
+@{ 
+    ViewBag.Title = Model.FullName;
+    var avatar = string.IsNullOrEmpty(Model.Avatar) ? "../../Content/Images/SamplePhotos/Picture2.jpg" : Model.Avatar;
+}
+    <div class="postContainer">
+        <div class="postDetails">
+            <div class="avatarContainer">
+                <a href="@Url.Action("Index","Profile", new { id = Model.Username })"><img alt="avatar" class="avatar" src="@avatar"></a>
+            </div>
+            <div class="detailsContainer">
+                <a href="@Url.Action("Index","Profile", new { id = Model.Username })"><div>@Model.FullName</div></a>
+                <p>@Model.CreatedOn</p>
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.ImagePath))
+        {
+            <div style="display: block;text-align:center">
+                <img alt="comment" src="@Model.ImagePath" style="width: 100%;">
+            </div>
+        }
+        <div class="postText">
+            <p>
+                @Model.Text
+            </p>
+        </div>
+        <div class="postActionsSummary">
+            <div class="postIcon likeIcon" style="background-color:#ccc"></div> @Model.Likes
+            <div class="postIcon intrestedIcon" style="background-color:#ccc"></div>@Model.Interests
+        </div>
+        <ul class="postActions">
+            <li class="liked_@Model.Liked" id="@Model.FeedId" action="@Convert.ToInt32(Gryffindor.Contract.Enums.NotificationType.Like)"><a href="#"><div class="postIcon likeIcon defaultBackground"></div><div>Like</div></a></li>
+            <li class="liked_@Model.Interested" id="@Model.FeedId" action="@Convert.ToInt32(Gryffindor.Contract.Enums.NotificationType.Interest)"><a href="#"><div class="postIcon intrestedIcon defaultBackground"></div><div>I am interested</div></a></li>
+        </ul>
+    </div>
+
+<script>
+
+        siteEvents.bindFeedEvents();
+
+</script>

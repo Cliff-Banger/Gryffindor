@@ -1,0 +1,38 @@
+﻿    <div id="actionBarNav">
+        <ul class="menu globalMaxWidth">
+            <li id="bars" class="menuItem mobileIcon">
+                <a href="#">
+                    <img src="~/Content/Images/Icons/Inception/Menu-48.png" class="icon defaultBackground menuIcon" />
+                </a>
+            </li>
+            <li class="menuItem">
+                <a href="@Url.Action("Index","Home")">
+                    <img src="~/Content/Images/Icons/Inception/Home-52.png" class="icon defaultBackground menuIcon" />
+                </a>
+            </li>
+            <li class="menuItem" style="display:none">
+                <a href="@Url.Action("Index","Home")">
+                    Inception
+                </a>
+            </li>
+            <li class="menuItem logout" style="float:right;">
+                <a href="#">
+                    <img src="~/Content/Images/Icons/Inception/Exit-52.png" alt="logout" class="icon defaultBackground menuIcon" />
+                </a>
+            </li>
+            <li class="menuItem notifications" style="float:right;position:relative">
+                <a href="#">
+                    <img src="~/Content/Images/Icons/Inception/bell-52.png" alt="notifications" class="icon defaultBackground menuIcon" />
+                </a>
+                <div class="hasNotifications"></div>
+            </li>
+            <li class="menuItem search" style="float:right;">
+                <a href="#">
+                    <img src="~/Content/Images/Icons/Inception/Search-48.png" alt="search" class="icon defaultBackground menuIcon" />
+                </a>
+            </li>
+        </ul>
+        <div id="notificationsContainer">
+            <div class="loader"></div>
+        </div>
+    </div>

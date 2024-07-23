@@ -1,0 +1,51 @@
+﻿@model IList<Gryffindor.Contract.Dto.Profession>
+@{ 
+    var heading = string.Empty;
+}
+<style>
+    .professions {
+        margin: 0 auto;
+        max-width:600px;
+        padding:8px;
+    }
+    .listItem {
+        padding:8px 4px;
+    }
+    input, select {
+        padding:8px 4px;
+        width: 100%;
+        max-width:500px;
+    }
+</style>
+<div class="professions">
+    <p>Which industry are you interested in?</p>
+    <input type="search" placeholder="Filter search" id="txtFilter">
+    <br/>
+    @foreach (var item in Model)
+    {
+        if (heading != item.Field)
+        {
+            heading = item.Field;
+            <div class="divHeading">@heading</div>
+            <hr>
+        }
+        <a href="@Url.Action("SetProfession", "Profile", new { name = item.Name })">
+            <div class="listItem">
+                @item.Name
+            </div>
+        </a>
+    }
+</div>
+<script>
+    $(window).ready(function () {
+        $("#txtFilter").keyup(function () {
+            $('.listItem').hide();
+            var txt = $(this).val();
+            $('.listItem').each(function () {
+                if ($(this).text().toUpperCase().indexOf(txt.toUpperCase()) != -1) {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>

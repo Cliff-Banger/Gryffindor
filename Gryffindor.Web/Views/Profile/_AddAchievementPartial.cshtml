@@ -1,0 +1,40 @@
+﻿@model Gryffindor.Web.Models.QualificationViewModel
+
+<div class="editProfileContainer">
+    <input type="hidden" value="@Convert.ToInt32(Gryffindor.Contract.Enums.QualificationType.Achievements)" name="type">
+    @Html.HiddenFor(m => m.UserProfileAchievement.UserProfileAchievementId)
+    @Html.AntiForgeryToken()
+    <ol>
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileAchievement.AchievementName)</p>
+            @Html.TextBoxFor(m => m.UserProfileAchievement.AchievementName, new { @placeholder = "Achievement e.g Employee of the month", @required = "required" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileAchievement.AchievementName)
+        </li>
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileAchievement.Description)</p>
+            @Html.TextBoxFor(m => m.UserProfileAchievement.Description, new { @placeholder = "Description... e.g where did you achieve it?" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileAchievement.Description)
+        </li>
+    </ol>
+    <ul class="datePlaceholder">
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileAchievement.AchievedAt)</p>
+            @Html.TextBoxFor(m => m.UserProfileAchievement.AchievedAt, new { @placeholder = "Achieved At", @required = "required" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileAchievement.AchievedAt)
+        </li>
+        <li>
+            <p class="label">@Html.LabelFor(m => m.UserProfileAchievement.AchievedOn)</p>
+            @Html.TextBoxFor(m => m.UserProfileAchievement.AchievedOn, new { @placeholder = "Date Achieved", @class = "datepicker", @readonly = "readonly", @required = "required" })
+            <br>@Html.ValidationMessageFor(m => m.UserProfileAchievement.AchievedOn)
+        </li>
+    </ul>
+</div>
+<div class="editProfileContainer">
+    <button type="submit" class="greenBackground btn">
+        Save Achievement
+    </button>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

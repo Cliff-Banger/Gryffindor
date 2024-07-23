@@ -1,0 +1,55 @@
+﻿<style>
+    .brandArea {font-size:23px;color:#fff;float:left;border-bottom:1px solid rgba(255,255,255,0.5);width:100%} 
+    .brandArea a, .brandArea a:visited, .brandArea a:hover {color:#fff}    
+    .link{display:inline-block;margin:0 5px;}
+    #body {margin-top: 0}
+</style>
+
+<div class="brandArea">
+    <a href="@Url.Action("Index","Home")">Inception</a>
+</div>
+
+<a href="#" class="navSectionMobileIcon">
+    <div class="postIcon barsIcon" style="width:inherit;height:inherit"></div>
+</a>
+
+<div class="navSection">
+    <a href="@Url.Action("Index","Account")">
+        <p class="link">Login/Register</p>
+    </a>
+    <a href="@Url.Action("Jobs","Feeds")">
+        <p class="link">Search Jobs</p>
+    </a>
+    <a href="@Url.Action("Privacy","Home")">
+        <p class="link">Privacy Policy</p>
+    </a>
+    <a href="@Url.Action("About","Home")">
+        <p class="link">About Inception</p>
+    </a>
+    <a href="@Url.Action("Contact","Home")">
+        <p class="link">Contact Us</p>
+    </a>
+</div>
+
+<div class="navSectionMobile">
+    <a href="@Url.Action("Index","Account")">
+        <p class="link">Login/Register</p>
+    </a>
+    <a href="@Url.Action("Jobs","Feeds")">
+        <p class="link">Search Jobs</p>
+    </a>
+    <a href="@Url.Action("Privacy","Home")">
+        <p class="link">Privacy Policy</p>
+    </a>
+    <a href="@Url.Action("About","Home")">
+        <p class="link">About Inception</p>
+    </a>
+    <a href="@Url.Action("Contact","Home")">
+        <p class="link">Contact Us</p>
+    </a>
+</div>
+
+<script>
+    $(document).ready(function () { $(".navSectionMobileIcon").click(function () { $(".navSectionMobile").stop().fadeToggle(); }); });
+    $(window).resize(function () { $(".navSectionMobile").fadeOut(); });
+</script>

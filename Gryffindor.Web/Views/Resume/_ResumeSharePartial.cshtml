@@ -1,0 +1,165 @@
+﻿<style>
+    .newResumeShare {
+        font-size:14px;
+        margin:10px 0;
+    }
+    .instruction {
+        padding: 4px;
+        background-color: #c7decd;
+    }
+    .resumeShareContainer {
+        margin-bottom: 0;
+    }
+    .resumeShareContainer input {
+
+    }
+    .resumeShareContainer button {
+        width: 50px;
+        height: 36px;
+        border: none;
+        cursor:pointer;
+    }
+    .newResumeShareResultMessage {
+        background-color: rgb(207, 230, 247);
+        padding: 5px;
+        font-weight: bold;
+    }
+
+    .sharedResumeListContainer {
+        font-size:14px;
+        padding:5px;
+    }
+    .sharedResumeItem {
+        position:relative;
+        margin:5px 0;
+        border-bottom:1px solid;
+        min-height:50px;
+        color:#fff;
+        background-color:#2d4358;
+    }
+    .sharedUserEmail {
+        padding:4px;
+        margin:0;
+    }
+    .sharedUserPermission {
+        padding:4px;
+        margin:0;
+        font-size:12px;
+    }
+    .sharedResumeListContainer .true {
+        font-weight:bold;
+    }
+    .sharedResumeListContainer button {
+        position:absolute;
+        right:0;
+        top:0;
+        width:50px;height:50px;
+        border:none;
+        cursor:pointer;
+        opacity:1;
+    }
+    .sharedResumeListContainer button:hover {
+        opacity:0.8;
+    }
+    .sharedResumeListContainer button:active {
+        opacity:0.7;
+    }
+
+    .editShareResumeContainer {
+        background-color:rgba(0,0,0,0.9);
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        display:none;
+    }
+
+    .editShareResumeDialog {
+        width: 90%;
+        max-width: 480px;
+        margin: 16% auto;
+        background-color: #fff;
+        padding: 5%;
+        position:relative;
+    }
+
+    #userEmail, #chkShareFullCV {
+        width: 95%;margin: 1% 0;
+    }
+
+    .redBackground {
+        background-color:#771f1f;
+        color:#fff;
+    }
+
+    .closeModal {
+        position:absolute;
+        top:-5px;
+        right:-5px;
+        color:#771f1f;
+        border:2px solid #771f1f;
+        font-weight:bold;
+        padding:8px 12px;
+    }
+</style>
+<input type="hidden" id="selectedSharedResumeItem"/>
+<div class="newResumeShare">
+    <div class="instruction">Add the email or user you'd like to like to share your CV with.</div>
+    <ul class="resumeShareContainer">
+        <li style="width: 80%;height: 40px;"><input type="text"></li>
+        <li><button class="blueBackground">Share</button></li>
+    </ul>
+    <div class="newResumeShareResultMessage">Your CV has been shared with [testusername@gmail.com]</div>
+</div>
+
+<div class="sharedResumeListContainer">
+
+    <div class="sharedResumeItem">
+        <p class="sharedUserEmail">[testusername@gmail.com]</p>
+        <p class="sharedUserPermission true">Can see personal details</p>
+        <button id="" class="greenBackground btnEdit">
+            Edit
+        </button>
+    </div>
+
+    <div class="sharedResumeItem">
+        <p class="sharedUserEmail">[testusername@gmail.com]</p>
+        <p class="sharedUserPermission true">Can see personal details</p>
+        <button id="" class="greenBackground btnEdit">
+            Edit
+        </button>
+    </div>
+</div>
+
+<div class="editShareResumeContainer">
+    <div class="editShareResumeDialog">
+        <div class="divSubHeading">Edit</div>
+        <hr>
+        <input type="text" placeholder="Email to share with" required name="userEmail" id="userEmail">
+        <div class="checkboxContainer">
+            <input type="checkbox" required id="chkShareFullCV" />
+            <label for="chkShareFullCV">Share my personal details</label>
+        </div>
+        <div class="actionSection">
+            <button class="redBackground">Delete</button>
+            <button class="blueBackground">Send Reminder</button>
+            <button class="greenBackground">Save</button>
+            <button class="closeModal">X</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(window).ready(function () {
+        $(".closeModal").click(function () {
+            $(".editShareResumeContainer").hide();
+            $("#chkShareFullCV").val("");
+            //$("#chkShareFullCV").checked =//();
+        });
+
+        $(".btnEdit").click(function () {
+            $(".editShareResumeContainer").show();
+        });
+    });
+</script>

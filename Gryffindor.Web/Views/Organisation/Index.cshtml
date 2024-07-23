@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Gryffindor.Contract.Dto.Organisation>
+@{
+    ViewBag.Title = "Organisation";
+}
+
+<div class="divHeading">Study further</div>
+<hr>
+
+@foreach (var item in Model)
+{
+    <div class="channelBox" style="background-image:url(@item.MainPicturePath)">
+        <div class="channelName">@item.Name</div>
+        <a href="@Url.Action("View","Organisation", new { id = item.OrganisationId })"><div class="channelOption">View</div></a>
+    </div>
+}

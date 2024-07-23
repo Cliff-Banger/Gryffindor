@@ -1,0 +1,20 @@
+﻿<div id="logoutContainer" class="modal">
+    <div class="logoutDialog">
+        <div class="divHeading">Logout</div>
+        <hr>
+
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <p>Are you sure you want to logout?</p>
+
+            <button class="defaultBackground">
+                Logout
+            </button>
+            <a href="#" class="greenBackground closeModal">
+                Cancel
+            </a>
+        }
+    </div>
+</div>

@@ -1,0 +1,61 @@
+﻿@model Gryffindor.Web.Models.QualificationViewModel
+@{
+    ViewBag.Title = "Qualifications";
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> 
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<input type="hidden" id="qualType" value="@ViewBag.Data">
+<input type="hidden" id="selectedId" value="@ViewBag.Selected">
+
+<a href="@Url.Action("Edit", "Profile")" style="opacity:0.7">
+    <div class="divHeading">Profile</div>
+</a>
+<a href="#" class="btn defaultBackground" style="padding:8px">Education / Work</a>
+<hr>
+<style>
+    .datePlaceholder li{
+        width:49%;
+    }
+</style>
+
+<div class="divSubHeading">Select a qualification to add</div>
+<hr>
+@Html.EnumDropDownListFor(m => m.QualificationType)
+
+@using (Html.BeginForm("SaveQualification", "Profile", FormMethod.Post))
+{
+    <div id="qualification"><div class="loader"></div></div>
+}
+
+<br/><br />
+<div id="qualificationList"><div class="loader"></div></div>
+@Html.Partial("~/Views/Profile/_EditQualificationItem.cshtml")
+<script>
+
+    $(window).ready(function () {
+        $("#QualificationType").val($("#qualType").val());
+        var selected = $("#selectedId").val();
+        qualificationTypeChange(selected);
+        $("#QualificationType").change(function () {
+            qualificationTypeChange("00000000-0000-0000-0000-000000000000");
+        });
+    });
+
+    function qualificationTypeChange(id) {
+        $("#qualification").html("");
+        $.get("/Profile/GetQualification", { type: $("#QualificationType").val(), id: id }, function (html) {
+            $("#qualification").html(html);
+            $(".datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                //showButtonPanel: true,
+                yearRange: '-20:+0'
+            });
+        });
+
+        $.get("/Profile/GetQualificationList", { type: $("#QualificationType").val(), selected: id }, function (html) {
+            $("#qualificationList").html(html);
+            siteEvents.bindEditQualificaionEvents("true");
+        });
+    }
+</script>

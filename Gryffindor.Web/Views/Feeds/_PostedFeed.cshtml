@@ -1,0 +1,65 @@
+﻿@model Gryffindor.Contract.DataModels.FeedsDataModel
+
+@{ 
+    bool canApply = false;
+    if (Model.UserProfileDetails != null)
+    {
+        canApply = (Model.UserProfileDetails.HasEducation > 0 && Model.UserProfileDetails.HasSkills > 0);
+    }
+    foreach (var item in Model.Feeds)
+    {
+        var date = string.Format("{0:r}", item.CreatedOn);
+        var avatar = string.IsNullOrEmpty(item.Avatar) ? "../../Content/Images/SamplePhotos/default.png" : item.Avatar;
+        <div class="postContainer">
+            <div class="postDetails">
+                <div class="avatarContainer">
+                    <a href="@Url.Action("View", "Profile", new { id = item.Username })"><img alt="avatar" class="avatar" src="@avatar"></a>
+                </div>
+                <div class="detailsContainer">
+                    <a href="@Url.Action("View", "Profile", new { id = item.Username })"><div>@item.FullName</div></a>
+                    <p>@date.Remove(date.Length - 7)</p>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(item.Title))
+            {
+                <p style="font-weight:bold">@item.Title</p>
+            }
+            @if (!string.IsNullOrEmpty(item.ImagePath))
+            {
+                <div style="display: block;text-align:center">
+                    <img alt="comment" src="@item.ImagePath" style="width: 100%;">
+                </div>
+            }
+            <div class="postText">
+                <p>
+                    @Html.Raw(item.Text.Replace(Environment.NewLine, "<br/>"))
+                </p>
+            </div>
+            <div class="postActionsSummary">
+                <div class="postIcon likeIcon" style="background-color:#ccc"></div> @item.Likes
+                <div class="postIcon intrestedIcon" style="background-color:#ccc"></div>@item.Interests
+            </div>
+            <ul class="postActions">
+                <li class="liked_@item.Liked" id="@item.FeedId" action="@Convert.ToInt32(Gryffindor.Contract.Enums.NotificationType.Like)"><a href="#"><div class="postIcon likeIcon defaultBackground"></div><div>Like</div></a></li>
+            
+                @if (item.FeedTypeId == Convert.ToInt32(Gryffindor.Contract.Enums.FeedType.Jobs))
+                {
+                    if (canApply)
+                    {
+                        <li class="liked_@item.Interested" id="@item.FeedId" action="@Convert.ToInt32(Gryffindor.Contract.Enums.NotificationType.Interest)"><a href="#"><div class="postIcon intrestedIcon defaultBackground"></div><div>I'm interested!</div></a></li>
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("Index", "Resume")">Complete CV to Apply</a></li>
+                    }
+                }
+            </ul>
+        </div>
+    } 
+}
+<script>
+
+        siteEvents.bindFeedEvents();
+
+</script>

@@ -1,0 +1,86 @@
+﻿@model Gryffindor.Contract.Dto.UserProfile
+
+<style>
+    .wizard .qualificationIcon {width: 57px;min-width: 40px;opacity:0.23;}
+    .wizard .selectedIcon{opacity:1}
+    .wizard .qualificationListItem {height: 57px; width: 16%;}
+    .wizard .postIcon {padding: 0;border-radius: 0;}
+    .content {background-color: transparent;}
+    .rightPane .qualificationListItem {width:98%}
+    .responseMessageProfile {padding:5px; border:1px solid #f1f1f1;display:none}
+    #errorMessageProfile{border-color:red; color:red; background:#ffd9d9}
+    #successMessageProfile{border-color:#003500; color:#009c00; background:#b8ffa7}
+</style>
+
+<div class="divSubHeading">Personal details</div>
+
+<div id="successMessageProfile" class="responseMessageProfile">Added successfully.</div>
+<div id="errorMessageProfile" class="responseMessageProfile">Something went wrong. Please try again</div>
+
+@using (Ajax.BeginForm("UpdateUserProfileAsync", "Profile", new AjaxOptions() { OnSuccess = "handleSuccessProfile", OnFailure = "handleFailureProfile", OnBegin = "handleBeginProfile" }))
+{
+    @Html.HiddenFor(m => m.Avatar)
+    @Html.HiddenFor(m => m.Field)
+    @Html.HiddenFor(m => m.FirstName)
+    @Html.HiddenFor(m => m.Gender)
+    @Html.HiddenFor(m => m.MainInterest)
+    @Html.HiddenFor(m => m.PreferredProfession)
+    @Html.AntiForgeryToken()
+    <div class="editProfileContainer">
+        <ol>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.PreferredEmail)</p>
+                @Html.TextBoxFor(m => m.PreferredEmail, new { @placeholder = "Email" })
+                <br>@Html.ValidationMessageFor(m => m.PreferredEmail)
+            </li>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.PhoneNumber)</p>
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @placeholder = "Phone number" })
+                <br>@Html.ValidationMessageFor(m => m.PhoneNumber)
+            </li>
+        </ol>
+    </div>
+    <div class="divSubHeading">About me</div>
+    <hr>
+    <div class="editProfileContainer">
+        <ol>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.HomeTown)</p>
+                @Html.TextBoxFor(m => m.HomeTown, new { @placeholder = "Hometown" })
+                <br>@Html.ValidationMessageFor(m => m.HomeTown)
+            </li>
+        </ol>
+        <ol>
+            <li>
+                <p class="label">@Html.LabelFor(m => m.Bio)</p>
+                @Html.TextAreaFor(m => m.Bio, new { @placeholder = "Bio" })
+                @*<br>@Html.ValidationMessageFor(m => m.Profile.Bio)*@
+            </li>
+        </ol>
+    </div>
+    <hr />
+    <div class="editProfileContainer">
+        <button type="submit" class="greenBackground btn">
+            Save changes
+        </button>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    handleSuccessProfile = function () {
+        $("#successMessageProfile").show();
+        window.setTimeout(function () { $("#successMessageProfile").fadeOut(); }, 5000)
+        qualificationTypeChange("00000000-0000-0000-0000-000000000000");
+    }
+
+    handleFailureProfile = function () {
+        $("#errorMessageProfile").show();
+        window.setTimeout(function () { $("#errorMessageProfile").fadeOut(); }, 5000)
+    }
+
+    handleBeginProfile = function () {
+       // $("button[type=submit]").click(function () { $(this).attr("disabled", "disabled"); });
+    }
+</script>

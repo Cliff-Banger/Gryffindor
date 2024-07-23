@@ -1,0 +1,131 @@
+﻿@model Gryffindor.Web.Models.NewFeedViewModel
+@{
+    ViewBag.Title = "New Post";
+}
+<style>
+    span.field-validation-error {
+        color: #FF1111;
+        background: #331E1E;
+            padding: 2px 5px;
+    }
+    select {
+        width:100%;
+        margin:1% auto;
+    }
+
+    #jobPostHeading {
+        display:none;
+    }
+</style>
+
+<div class="message">@ViewBag.Message</div>
+
+@using (Html.BeginForm("PostFeed", "Feeds", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.FeedTypeId)
+
+    <div class="newPostContainer">
+        <p style="font-size: 14px;color: #333;font-weight: 100;">Let everyone know what you have done - or what you're looking for...</p>
+
+        <div class="checkboxContainer" style="display:none">
+            <input type="checkbox" id="chkJobPost" />
+            <label for="chkJobPost">Create a job post</label>
+        </div>
+
+        <input type="text" placeholder="Job Heading" required name="Title" id="jobPostHeading">
+
+        <div class="newPostText">
+            
+            <div class="avatar">
+                <img id="thumbAvatar" src="/Content/Images/SamplePhotos/default.png" style="width:100%"> 
+            </div>
+            <div>
+                @Html.EditorFor(m => m.Text, new { @placeholder = "Let everyone know what you're looking for..." })
+            </div>
+            
+        </div>       
+        <img id="postedPicture" style="width:60px;display:inline-block" />
+        <div style="text-align:left;padding:8px 12px;display:none" class="blueBackground" id="postedPictureContainer">x</div>
+        @Html.ValidationMessageFor(m => m.Text)
+        <ul class="postActions">
+            <li class="button defaultBackground" style="padding: 2px 8px 0 8px;">
+                <div class="divUpload">
+                    <a href="#">
+                        <img src="~/Content/Images/Icons/camera-white.png" alt="Attach" />
+                        @Html.TextBoxFor(m => m.ImageFile, new { @id = "imgUpload", @type="file", @class = "upload", @accept = "image/*"})
+                        <br>
+                    </a>
+                </div>@Html.ValidationMessageFor(m => m.ImageFile)
+            </li>
+            <li class="button defaultBackground" style="float:right"><button type="submit">Post</button></li>
+            @*<li class="button greenBackground" style="float:right"><a href="#">Sponsored Post</a></li>*@
+        </ul>
+        
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    $(window).ready(function () {
+
+        $.get("/Resume/CanDownloadResume", { id: "00000000-0000-0000-0000-000000000000", username: "" }, function (result) {
+            if (result.toLowerCase() == "true")
+                $(".checkboxContainer").show();
+            else
+                $(".checkboxContainer").remove();
+        });
+
+        $("#imgUpload").change(function () {
+            readURL(this);
+        });
+        $("#postedPictureContainer").click(function () {
+            var input = $("#imgUpload");
+            input.replaceWith(input.val('').clone(true));
+        });
+        if ($("#chkJobPost").length) {
+            $("#chkJobPost").change(function () {
+                if (this.checked) {
+                    $("#FeedTypeId").val("2");
+                    $("#jobPostHeading").show();
+                }
+                else {
+                    $("#FeedTypeId").val("1");
+                    $("#jobPostHeading").hide();
+                }
+            });
+        }
+    });
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $("#postedPicture").attr("src", e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+            //$("#postedPictureContainer").css({"display":"inline-block"});
+        }
+        else {
+            $("#postedPictureContainer").hide();
+        }
+    }
+
+    $(window).ready(function () {
+        $.ajax({
+            url: "/Profile/GetUserDetails",
+            type: "GET",
+            //dataType: "application/json",
+            success: function (data) {
+                if (data != null && data["Avatar"] != null)
+                    if (data["Avatar"] != "")
+                        $("#thumbAvatar").attr("src", data["Avatar"]);
+            },
+            error: function () {
+            }
+        });
+    });
+</script>

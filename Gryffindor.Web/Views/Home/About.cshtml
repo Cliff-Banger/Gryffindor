@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+<style>
+    .aboutSection { background-color: rgba(0,0,0,0.7)!important; text-align: center;color:#eee;margin-top: 102px;}
+    .collageContainer { position:fixed; width:100%; height: 100%;z-index:-1;top:0;left:0}
+    .divHeading{ color: rgb(29, 36, 46);background-color: #eee;}
+    .brandArea {font-size:23px;color:#fff;float:left;border-bottom:1px solid rgba(255,255,255,0.5);width:100%}
+</style>
+
+@Html.Partial("~/Views/Shared/_TitleBar.cshtml")
+
+<div id="aboutSection">
+    @Html.Action("AboutPartial", "Home")
+</div>
+
+<div class="collageContainer"></div>
+<script>
+    $(window).ready(function () {
+        if (document.body.clientWidth > 640) {
+            $.get("/Account/GenerateCollage", function (html) {
+                $(".collageContainer").html(html);
+            });
+        } else {
+            $.get("/Account/GenerateMobileCollage", function (html) {
+                $(".collageContainer").html(html);
+                $(".divCollageItem").css({ "opacity": "0.1" });
+            });
+        }
+    });
+</script>

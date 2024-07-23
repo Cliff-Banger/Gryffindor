@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Profession";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+<style>
+    .content {
+        background-color:#dedede;
+    }
+</style>
+<div class="message">@ViewBag.Message</div>
+
+@Html.Action("ProfessionPartial", "Profile");

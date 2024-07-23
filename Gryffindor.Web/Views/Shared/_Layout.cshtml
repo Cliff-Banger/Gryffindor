@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Inception</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryajax")
+        @Scripts.Render("~/Content/js")
+        @RenderSection("scripts", required: false)
+        <script>
+            $(window).ready(function () {
+                $("#btnPreparation").click(function () {$("#dashboardContainer").fadeIn();});
+                $(".closeModal").click(function () { $(".modal").fadeOut(); });
+            });
+            </script>
+    </head>
+    <body>
+       <header>
+          @Html.Partial("_ActionBar")
+       </header>         
+        
+        <style>
+            
+        </style>
+        <ul id="sideMenu">
+            <li class="liProfile">@Html.Partial("_LeftPane")</li>
+            <li class="sideMenuItemHeading">Actions</li>
+            <li class="sideMenuItem"><a href="@Url.Action("Index","Home")"><div class="homeIcon">Home</div></a></li>
+            <li class="sideMenuItem"><a href="@Url.Action("PostFeed","Feeds")"><div class="editIcon">Post something</div></a></li>
+            @*<li class="sideMenuItem"><a href="@Url.Action("Index","Organisation")"><div class="schoolIcon">Study Further</div></a></li>*@
+            <li class="sideMenuItemHeading">Manage</li>
+            <li class="sideMenuItem"><a href="@Url.Action("Index","Profile")"><div class="userIcon">Profile</div></a></li>
+            <li class="sideMenuItem"><a href="@Url.Action("Index","Resume")"><div class="resumeIcon">My CV</div></a></li>
+            @*<li class="sideMenuItem"><a href="@Url.Action("Interests","Profile")"><div class="intrestedIcon">Interests</div></a></li>*@
+            <li class="sideMenuItem"><a href="@Url.Action("Index","Manage")"><div class="gearIcon">Account Settings</div></a></li>
+        </ul>
+        
+       <div id="body" class="globalMaxWidth">
+           @Html.Partial("_LeftPane")
+           
+           <div class="content">
+              @RenderBody()
+           </div>
+           @Html.Partial("_RightPane")
+       </div>
+        @Html.Partial("_SearchBar")
+        @Html.Partial("_LogoutPartial")
+
+    </body>
+</html>

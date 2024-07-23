@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Gryffindor.Contract.Dto.UserProfileEducation>
+
+<div class="divSubHeading">Education</div>
+<hr>
+@if (!Model.Any())
+{
+    <p>Nothing added yet...</p>
+}
+@{
+    var qualType = (int)Gryffindor.Contract.Enums.QualificationType.Education;
+    foreach (var item in Model)
+    {
+        var dateText = item.DateTo == null ? "Present" : item.DateTo.Value.Date.ToString("d");
+        <div class="qualificationListItem">
+            <div class="qualificationIcon gradIcon purpleBackground"></div>
+            <div class="qualificationInfo" id="@item.UserProfileEducationId" qualType="@qualType">
+                <p><b>@item.SchoolName</b></p>
+                <p>@item.DateFrom.Value.Date.ToString("d") - @dateText</p>
+            </div>
+        </div>
+    }
+}

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Gryffindor.Contract.Dto.UserProfileSkill>
+<style>
+    .progressContainer {
+        width:100%;
+        border: 1px solid #0094ff;
+        height:10px;
+    }
+    .progress {
+        height:inherit;
+    }
+</style>
+<div class="divSubHeading">My Skills</div>
+<hr>
+@if (!Model.Any())
+{
+    <p>Nothing added yet...</p>
+}
+@{
+    var qualType = (int)Gryffindor.Contract.Enums.QualificationType.Skills;
+    foreach (var item in Model)
+    {
+        <div class="qualificationListItem">
+            <div class="qualificationIcon skillIcon blueBackground"></div>
+            <div class="qualificationInfo" id="@item.UserProfileSkillId" qualType="@qualType">
+                <p><b>@item.SkillName</b></p>
+                <div class="progressContainer"><div class="progress blueBackground" style="width:@string.Format("{0}0%",item.Rating)"></div></div>
+            </div>
+        </div>
+    }
+}

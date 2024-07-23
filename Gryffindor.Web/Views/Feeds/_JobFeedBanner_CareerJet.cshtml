@@ -1,0 +1,80 @@
+﻿@model Gryffindor.Web.Models.SearchViewModel
+
+@{ 
+    WebService.Careerjet.Client c = new WebService.Careerjet.Client("en_ZA");
+    System.Collections.Hashtable cargs = new System.Collections.Hashtable();
+
+    cargs.Add("keywords", Model.Keywords);
+    cargs.Add("location", Model.Location);
+    cargs.Add("pagesize", Model.PageSize.ToString());
+
+    var res = c.Search(cargs);
+    if (res["jobs"] != null)
+    {
+        int counter = 0;
+        counter++;
+        foreach (var job in res["jobs"].Children())
+        {
+            var url = job["url"].ToString().Replace("\"", "");
+            var title = job["title"].ToString().Replace("\"", "");
+            var company = job["company"].ToString().Replace("\"", "");
+            var date = job["date"].ToString().Replace("\"", "");
+            var locations = job["locations"].ToString().Replace("\"", "");
+            var description = job["description"].ToString().Replace("\"", "");
+            var salary = job["salary"].ToString().Replace("\"", "");
+            var site = job["site"].ToString().Replace("\"", "");
+
+            if (Model.KeywordsToExclude?.FirstOrDefault(x => x.Equals(url, StringComparison.InvariantCultureIgnoreCase)) != null)
+            { continue; }
+
+            <div class="postContainer swiper-slide">
+                <div class="postDetails">
+                    <div class="avatarContainer">
+                        <a href="#"><img alt="avatar" class="avatar" src="../../Content/Images/SamplePhotos/Picture2.jpg"></a>
+                    </div>
+                    <div class="detailsContainer">
+                        <a href="#"><div>@title</div></a>
+                        <p>@company posted: @date</p>
+                    </div>
+                </div>
+                <div class="postText">
+                    <p>
+                        @Html.Raw(locations)
+                        <br>
+                        @Html.Raw(description)
+                    </p>
+                    @if (!string.IsNullOrEmpty(salary))
+                    {
+                    <p>
+                        pay: @Html.Raw(salary)
+                    </p>
+                    }
+                </div>
+                <div class="postActionsSummary">
+                    <a href="@url" target="_blank"><span style="float:right">@site</span></a>
+                </div>
+                <div class="postActions">
+                    @if (Model.CanApply)
+                    {
+                                <p></p>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Index", "Wizard")">
+                            <div class="defaultBackground">
+                                <div class="" style="display:block;border:none;">
+                                    Complete your CV to Apply
+                                </div>
+                            </div>
+                        </a>
+                    }
+                </div>
+            </div>
+            }
+        }
+        else
+        {
+            <p>No jobs found for @Model.Keywords in @Model.Location</p>
+            <a href="@Url.Action("Edit","Profile")"><div class="greenBackground" style="padding:5px; width:auto">Would you like to change your search location?</div></a>
+        }
+    }
